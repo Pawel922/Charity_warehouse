@@ -11,7 +11,6 @@ import pl.coderslab.charity.repository.InstitutionRepository;
 
 import java.util.List;
 
-
 @Controller
 public class HomeController {
 
@@ -37,5 +36,10 @@ public class HomeController {
     @ModelAttribute("numOfPackages")
     public int getNumberOfPackages() {
         return donationRepository.findAll().stream().mapToInt(Donation::getQuantity).sum();
+    }
+
+    @ModelAttribute("numOfDonations")
+    public long getNumberOfDonations() {
+        return donationRepository.findAll().stream().count();
     }
 }
