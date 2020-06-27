@@ -32,6 +32,8 @@ public class Donation {
 
     private String zipCode;
 
+    private String phoneNumber;
+
     private LocalDate pickUpDate;
 
     private LocalTime pickUpTime;
@@ -94,6 +96,14 @@ public class Donation {
         this.zipCode = zipCode;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public LocalDate getPickUpDate() {
         return pickUpDate;
     }
@@ -130,6 +140,7 @@ public class Donation {
                 Objects.equals(street, donation.street) &&
                 Objects.equals(city, donation.city) &&
                 Objects.equals(zipCode, donation.zipCode) &&
+                Objects.equals(phoneNumber, donation.phoneNumber) &&
                 Objects.equals(pickUpDate, donation.pickUpDate) &&
                 Objects.equals(pickUpTime, donation.pickUpTime) &&
                 Objects.equals(pickUpComment, donation.pickUpComment);
@@ -137,6 +148,6 @@ public class Donation {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, quantity, categories, institution, street, city, zipCode, pickUpDate, pickUpTime, pickUpComment);
+        return Objects.hash(id, quantity, categories, institution, street, city, zipCode, phoneNumber, pickUpDate, pickUpTime, pickUpComment);
     }
 }
