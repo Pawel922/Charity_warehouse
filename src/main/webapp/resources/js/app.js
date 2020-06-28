@@ -105,6 +105,16 @@ document.addEventListener("DOMContentLoaded", function() {
           this.pickUpComment = "";
       }
   }
+  
+  function properGrammarForm(quantity) {
+      if (quantity === 1) {
+          return ' worek: '
+      } else if (quantity > 1 && quantity < 5) {
+          return ' worki: '
+      } else {
+          return ' worków: '
+      }
+  }
 
   /**
    * Switching between form steps
@@ -213,6 +223,15 @@ document.addEventListener("DOMContentLoaded", function() {
               });
           });
           console.log(donation);
+
+          document.querySelectorAll(".summary--text")[0].innerHTML =
+              donation.quantity +
+              properGrammarForm(donation.quantity) +
+              donation.categories.toString();
+
+          document.querySelectorAll(".summary--text")[1].innerHTML =
+              'Dla ' +
+              donation.institution.toString();
       }
     }
 
