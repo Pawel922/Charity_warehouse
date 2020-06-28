@@ -116,6 +116,25 @@ document.addEventListener("DOMContentLoaded", function() {
       }
   }
 
+  function setAllValuesInSummary(donation) {
+      document.querySelectorAll(".summary--text")[0].innerHTML =
+          donation.quantity +
+          properGrammarForm(donation.quantity) +
+          donation.categories.toString();
+
+      document.querySelectorAll(".summary--text")[1].innerHTML =
+          'Dla ' +
+          donation.institution.toString();
+
+      document.querySelectorAll(".summary div div ul li")[0].innerHTML = donation.street;
+      document.querySelectorAll(".summary div div ul li")[1].innerHTML = donation.city;
+      document.querySelectorAll(".summary div div ul li")[2].innerHTML = donation.zipCode;
+      document.querySelectorAll(".summary div div ul li")[3].innerHTML = donation.phoneNumber;
+      document.querySelectorAll(".summary div div ul li")[4].innerHTML = donation.pickUpDate;
+      document.querySelectorAll(".summary div div ul li")[5].innerHTML = donation.pickUpTime;
+      document.querySelectorAll(".summary div div ul li")[6].innerHTML = donation.pickUpComment;
+  }
+
   /**
    * Switching between form steps
    */
@@ -222,16 +241,12 @@ document.addEventListener("DOMContentLoaded", function() {
                   }
               });
           });
-          console.log(donation);
 
-          document.querySelectorAll(".summary--text")[0].innerHTML =
-              donation.quantity +
-              properGrammarForm(donation.quantity) +
-              donation.categories.toString();
+          //get value from textarea
+          const comment = document.querySelector("textarea").value;
+          donation.pickUpComment = comment;
 
-          document.querySelectorAll(".summary--text")[1].innerHTML =
-              'Dla ' +
-              donation.institution.toString();
+          setAllValuesInSummary(donation);
       }
     }
 
