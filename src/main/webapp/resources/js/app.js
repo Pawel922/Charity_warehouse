@@ -91,6 +91,21 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+  class Donation {
+      constructor() {
+          this.categories = [];
+          this.institution = "";
+          this.quantity = "";
+          this.street = "";
+          this.city = "";
+          this.zipCode = "";
+          this.phoneNumber = "";
+          this.pickUpTime = "";
+          this.pickUpDate = "";
+          this.pickUpComment = "";
+      }
+  }
+
   /**
    * Switching between form steps
    */
@@ -164,6 +179,41 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
+
+      if (this.currentStep >= 5) {
+          const donation = new Donation();
+          const inputElements = [];
+          //find all input elements from each form step
+          this.slides.forEach(slide => {
+              let results = slide.querySelectorAll(".form-group input");
+              if (results.length !== 0) {
+                  results.forEach(item => {
+                      inputElements.push(item);
+                  })
+              }
+          });
+
+          //find all checkboxes and radio elements and check which one are selected
+          inputElements.forEach(inputElem => {
+              //set particular attributes of Donation object
+              if (inputElem.type == 'checkbox' && inputElem.checked == true) {
+                  donation['categories'].push(inputElem.dataset.name);
+              } else if (inputElem.type == 'radio' && inputElem.checked == true) {
+                  donation['institution'] = inputElem.dataset.name;
+              }
+          });
+
+          //get all attributes of Donation object excluding categories and institutions
+          Object.getOwnPropertyNames(donation).splice(2,).forEach(property => {
+              //set particular attributes of Donation object
+              inputElements.forEach(inputElem => {
+                  if(inputElem.name == property) {
+                      donation[property] = inputElem.value;
+                  }
+              });
+          });
+          console.log(donation);
+      }
     }
 
   }
