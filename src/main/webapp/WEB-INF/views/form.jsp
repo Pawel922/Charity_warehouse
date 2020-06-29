@@ -78,7 +78,7 @@
       <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form action="form-confirmation.html" method="post">
+        <form action="/donation" method="post">
           <!-- STEP 1: class .active is switching steps -->
           <div data-step="1" class="active">
             <h3>Zaznacz co chcesz oddać:</h3>
@@ -86,7 +86,7 @@
             <c:forEach items="${categories}" var="category">
               <div class="form-group form-group--checkbox">
                 <label>
-                  <input type="checkbox" name="categories" value="${category.id}" data-name='${category.name}'/>
+                  <input type="checkbox" name="categoryId" value="${category.id}" data-name='${category.name}'/>
                   <span class="checkbox"></span>
                   <span class="description">${category.name}</span>
                 </label>
@@ -117,14 +117,14 @@
 
 
 
-          <!-- STEP 4 -->
+          <!-- STEP 3 -->
           <div data-step="3">
             <h3>Wybierz organizacje, której chcesz pomóc:</h3>
 
             <c:forEach items="${institutions}" var="institution">
                  <div class="form-group form-group--checkbox">
                      <label>
-                         <input type="radio" name="institution" value="${institution.id}" data-name='${institution.name}'/>
+                         <input type="radio" name="institutionId" value="${institution.id}" data-name='${institution.name}'/>
                          <span class="checkbox radio"></span>
                          <span class="description">
                             <div class="title">${institution.name}</div>
@@ -140,7 +140,7 @@
             </div>
           </div>
 
-          <!-- STEP 5 -->
+          <!-- STEP 4 -->
           <div data-step="4">
             <h3>Podaj adres oraz termin odbioru rzecz przez kuriera:</h3>
 
@@ -185,7 +185,7 @@
             </div>
           </div>
 
-          <!-- STEP 6 -->
+          <!-- STEP 5 -->
           <div data-step="5">
             <h3>Podsumowanie Twojej darowizny</h3>
 
