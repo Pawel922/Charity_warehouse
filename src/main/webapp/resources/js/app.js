@@ -135,6 +135,19 @@ document.addEventListener("DOMContentLoaded", function() {
       document.querySelectorAll(".summary div div ul li")[6].innerHTML = donation.pickUpComment;
   }
 
+  function getAllInputElements(slides) {
+      const resultArray = [];
+      slides.forEach(slide => {
+          let results = slide.querySelectorAll(".form-group input");
+          if (results.length !== 0) {
+              results.forEach(item => {
+                  results.push(item);
+              })
+          }
+      });
+      return resultArray;
+  }
+
   /**
    * Switching between form steps
    */
@@ -169,7 +182,16 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$next.forEach(btn => {
         btn.addEventListener("click", e => {
           e.preventDefault();
-          this.currentStep++;
+          if (this.currentStep == 1) {
+                let inputsToCheck = document.querySelectorAll("div[data-step='1'] input");
+                let atLeastOneIsSelected = false;
+                inputsToCheck.forEach(input => {
+                    if(input.checked == true) {
+                        atLeastOneIsSelected = true;
+                    }
+                });
+                atLeastOneIsSelected ? this.currentStep++ : document.querySelector(".warning p").innerHTML = "Nie zaznaczyłes niczego";
+          }
           this.updateForm();
         });
       });
@@ -179,6 +201,9 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.addEventListener("click", e => {
           e.preventDefault();
           this.currentStep--;
+          document.querySelectorAll(".warning p").forEach(el => {
+              el.innerHTML = "";
+          });
           this.updateForm();
         });
       });
@@ -192,6 +217,7 @@ document.addEventListener("DOMContentLoaded", function() {
      * Show next or previous section etc.
      */
     updateForm() {
+
       this.$step.innerText = this.currentStep;
 
       // TODO: Validation
@@ -210,16 +236,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       if (this.currentStep >= 5) {
           const donation = new Donation();
-          const inputElements = [];
-          //find all input elements from each form step
-          this.slides.forEach(slide => {
-              let results = slide.querySelectorAll(".form-group input");
-              if (results.length !== 0) {
-                  results.forEach(item => {
-                      inputElements.push(item);
-                  })
-              }
-          });
+          const inputElements = getAllInputElements(this.slides);
 
           //find all checkboxes and radio elements and check which one are selected
           inputElements.forEach(inputElem => {

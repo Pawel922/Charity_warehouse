@@ -96,6 +96,9 @@
             <div class="form-group form-group--buttons">
               <button type="button" class="btn next-step">Dalej</button>
             </div>
+            <div class="warning">
+                <p></p>
+            </div>
           </div>
 
           <!-- STEP 2 -->
