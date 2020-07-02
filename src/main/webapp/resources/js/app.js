@@ -182,9 +182,10 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$next.forEach(btn => {
         btn.addEventListener("click", e => {
           e.preventDefault();
+          let inputsToCheck;
+          let atLeastOneIsSelected = false;
           if (this.currentStep == 1) {
-              let inputsToCheck = document.querySelectorAll("div[data-step='1'] input");
-              let atLeastOneIsSelected = false;
+              inputsToCheck = document.querySelectorAll("div[data-step='1'] input");
               inputsToCheck.forEach(input => {
                   if (input.checked == true) {
                       atLeastOneIsSelected = true;
@@ -192,9 +193,17 @@ document.addEventListener("DOMContentLoaded", function() {
               });
               atLeastOneIsSelected ? this.currentStep++ : document.querySelector("div[data-step='1'] .warning p").innerHTML = "Nie zaznaczyłes niczego";
           } else if (this.currentStep == 2) {
-              let inputsToCheck = document.querySelector("div[data-step='2'] input");
+              inputsToCheck = document.querySelector("div[data-step='2'] input");
               const regex = /^[1-9][0-9]*/;
               regex.test(inputsToCheck.value) ? this.currentStep++ :  document.querySelector("div[data-step='2'] .warning p").innerHTML = "Wskaż ilość"
+          } else if (this.currentStep == 3) {
+              inputsToCheck = document.querySelectorAll("div[data-step='3'] input");
+              inputsToCheck.forEach(input => {
+                  if (input.checked == true) {
+                      atLeastOneIsSelected = true;
+                  }
+              });
+              atLeastOneIsSelected ? this.currentStep++ : document.querySelector("div[data-step='3'] .warning p").innerHTML = "Nie wybrałeś instytucji";
           }
           this.updateForm();
         });
