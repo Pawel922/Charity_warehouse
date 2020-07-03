@@ -191,11 +191,11 @@ document.addEventListener("DOMContentLoaded", function() {
                       atLeastOneIsSelected = true;
                   }
               });
-              atLeastOneIsSelected ? this.currentStep++ : document.querySelector("div[data-step='1'] .warning p").innerHTML = "Nie zaznaczyłes niczego";
+              atLeastOneIsSelected ? this.currentStep++ : document.querySelector("div[data-step='1'] p.warning").innerHTML = "Nie zaznaczyłes niczego";
           } else if (this.currentStep == 2) {
               inputsToCheck = document.querySelector("div[data-step='2'] input");
               const regex = /^[1-9][0-9]*/;
-              regex.test(inputsToCheck.value) ? this.currentStep++ :  document.querySelector("div[data-step='2'] .warning p").innerHTML = "Wskaż ilość"
+              regex.test(inputsToCheck.value) ? this.currentStep++ :  document.querySelector("div[data-step='2'] p.warning").innerHTML = "Wskaż ilość"
           } else if (this.currentStep == 3) {
               inputsToCheck = document.querySelectorAll("div[data-step='3'] input");
               inputsToCheck.forEach(input => {
@@ -203,7 +203,19 @@ document.addEventListener("DOMContentLoaded", function() {
                       atLeastOneIsSelected = true;
                   }
               });
-              atLeastOneIsSelected ? this.currentStep++ : document.querySelector("div[data-step='3'] .warning p").innerHTML = "Nie wybrałeś instytucji";
+              atLeastOneIsSelected ? this.currentStep++ : document.querySelector("div[data-step='3'] p.warning").innerHTML = "Nie wybrałeś instytucji";
+          } else if (this.currentStep == 4) {
+              let allValuesCorrect = true;
+              inputsToCheck = document.querySelectorAll("div[data-step='4'] input");
+              inputsToCheck.forEach(input => {
+                  if (input.name == 'zipCode') {
+                      const regex = /^[0-9]{2}-[0-9]{3}/ ;
+                      if(!regex.test(input.value)) {
+                          allValuesCorrect = false;
+                          document.querySelector("input[name='zipCode']").parentElement.nextElementSibling.innerHTML = "Błędny kod pocztowy"
+                      }
+                  }
+              });
           }
           this.updateForm();
         });
@@ -214,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.addEventListener("click", e => {
           e.preventDefault();
           this.currentStep--;
-          document.querySelectorAll(".warning p").forEach(el => {
+          document.querySelectorAll("p.warning").forEach(el => {
               el.innerHTML = "";
           });
           this.updateForm();

@@ -96,8 +96,8 @@
             <div class="form-group form-group--buttons">
               <button type="button" class="btn next-step">Dalej</button>
             </div>
-            <div class="warning">
-                <p></p>
+            <div>
+                <p class="warning"></p>
             </div>
           </div>
 
@@ -116,8 +116,8 @@
               <button type="button" class="btn prev-step">Wstecz</button>
               <button type="button" class="btn next-step">Dalej</button>
             </div>
-            <div class="warning">
-              <p></p>
+            <div>
+              <p class="warning"></p>
             </div>
           </div>
 
@@ -144,8 +144,8 @@
               <button type="button" class="btn prev-step">Wstecz</button>
               <button type="button" class="btn next-step">Dalej</button>
             </div>
-            <div class="warning">
-              <p></p>
+            <div>
+              <p class="warning"></p>
             </div>
           </div>
 
@@ -166,6 +166,7 @@
 
                 <div class="form-group form-group--inline">
                   <label>Kod pocztowy<input type="text" name="zipCode"/></label>
+                  <p class="warning"></p>
                 </div>
 
                 <div class="form-group form-group--inline">
