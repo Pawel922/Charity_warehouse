@@ -148,6 +148,12 @@ document.addEventListener("DOMContentLoaded", function() {
       return resultArray;
   }
 
+  function clearWarnings() {
+      document.querySelectorAll("p.warning").forEach(el => {
+          el.innerHTML = "";
+      });
+  }
+
   /**
    * Switching between form steps
    */
@@ -182,6 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$next.forEach(btn => {
         btn.addEventListener("click", e => {
           e.preventDefault();
+          clearWarnings();
           let inputsToCheck;
           let atLeastOneIsSelected = false;
           if (this.currentStep == 1) {
@@ -209,10 +216,16 @@ document.addEventListener("DOMContentLoaded", function() {
               inputsToCheck = document.querySelectorAll("div[data-step='4'] input");
               inputsToCheck.forEach(input => {
                   if (input.name == 'zipCode') {
-                      const regex = /^[0-9]{2}-[0-9]{3}/ ;
+                      const regex = /^[0-9]{2}-[0-9]{3}$/ ;
                       if(!regex.test(input.value)) {
                           allValuesCorrect = false;
                           document.querySelector("input[name='zipCode']").parentElement.nextElementSibling.innerHTML = "Błędny kod pocztowy"
+                      }
+                  } else if (input.name == 'phoneNumber') {
+                      const regex = /^[0-9]{9}$/;
+                      if(!regex.test(input.value)) {
+                          allValuesCorrect = false;
+                          document.querySelector("input[name='phoneNumber']").parentElement.nextElementSibling.innerHTML = "Nieprawidłowy numer"
                       }
                   }
               });
@@ -226,9 +239,7 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.addEventListener("click", e => {
           e.preventDefault();
           this.currentStep--;
-          document.querySelectorAll("p.warning").forEach(el => {
-              el.innerHTML = "";
-          });
+          clearWarnings();
           this.updateForm();
         });
       });

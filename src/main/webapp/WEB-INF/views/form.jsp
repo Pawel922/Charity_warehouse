@@ -170,7 +170,8 @@
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label>Numer telefonu<input type="phone" name="phoneNumber"/></label>
+                  <label>Numer telefonu<input type="tel" name="phoneNumber"/></label>
+                  <p class="warning"></p>
                 </div>
               </div>
 
