@@ -158,6 +158,7 @@
                 <h4>Adres odbioru</h4>
                 <div class="form-group form-group--inline">
                   <label>Ulica<input type="text" name="street"/></label>
+                  <p class="warning"></p>
                 </div>
 
                 <div class="form-group form-group--inline">

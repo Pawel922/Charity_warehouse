@@ -227,6 +227,12 @@ document.addEventListener("DOMContentLoaded", function() {
                           allValuesCorrect = false;
                           document.querySelector("input[name='phoneNumber']").parentElement.nextElementSibling.innerHTML = "Nieprawidłowy numer"
                       }
+                  } else if (input.name == 'street') {
+                      const regex = /^\s*$/;
+                      if(regex.test(input.value)) {
+                          allValuesCorrect = false;
+                          document.querySelector("input[name='street']").parentElement.nextElementSibling.innerHTML = "Nie może być puste"
+                      }
                   }
               });
           }
