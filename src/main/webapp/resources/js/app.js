@@ -233,6 +233,12 @@ document.addEventListener("DOMContentLoaded", function() {
                           allValuesCorrect = false;
                           document.querySelector("input[name='street']").parentElement.nextElementSibling.innerHTML = "Nie może być puste"
                       }
+                  } else if (input.name == 'city') {
+                      const regex = /^\s*$/;
+                      if(regex.test(input.value)) {
+                          allValuesCorrect = false;
+                          document.querySelector("input[name='city']").parentElement.nextElementSibling.innerHTML = "Nie może być puste"
+                      }
                   }
               });
           }

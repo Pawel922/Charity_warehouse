@@ -163,6 +163,7 @@
 
                 <div class="form-group form-group--inline">
                   <label>Miasto<input type="text" name="city"/></label>
+                  <p class="warning"></p>
                 </div>
 
                 <div class="form-group form-group--inline">
