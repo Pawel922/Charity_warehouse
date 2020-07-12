@@ -213,29 +213,34 @@ document.addEventListener("DOMContentLoaded", function() {
               atLeastOneIsSelected ? this.currentStep++ : document.querySelector("div[data-step='3'] p.warning").innerHTML = "Nie wybrałeś instytucji";
           } else if (this.currentStep == 4) {
               let allValuesCorrect = true;
+              const regexToCheckEmpty = /^\s*$/;
               inputsToCheck = document.querySelectorAll("div[data-step='4'] input");
               inputsToCheck.forEach(input => {
                   if (input.name == 'zipCode') {
                       const regex = /^[0-9]{2}-[0-9]{3}$/ ;
-                      if(!regex.test(input.value)) {
+                      if (regexToCheckEmpty.test(input.value)) {
+                          allValuesCorrect = false;
+                          document.querySelector("input[name='zipCode']").parentElement.nextElementSibling.innerHTML = "Nie może być puste"
+                      } else if (!regex.test(input.value)) {
                           allValuesCorrect = false;
                           document.querySelector("input[name='zipCode']").parentElement.nextElementSibling.innerHTML = "Błędny kod pocztowy"
                       }
                   } else if (input.name == 'phoneNumber') {
                       const regex = /^[0-9]{9}$/;
-                      if(!regex.test(input.value)) {
+                      if (regexToCheckEmpty.test(input.value)) {
+                          allValuesCorrect = false;
+                          document.querySelector("input[name='phoneNumber']").parentElement.nextElementSibling.innerHTML = "Nie może być puste"
+                      } else if (!regex.test(input.value)) {
                           allValuesCorrect = false;
                           document.querySelector("input[name='phoneNumber']").parentElement.nextElementSibling.innerHTML = "Nieprawidłowy numer"
                       }
                   } else if (input.name == 'street') {
-                      const regex = /^\s*$/;
-                      if(regex.test(input.value)) {
+                      if (regexToCheckEmpty.test(input.value)) {
                           allValuesCorrect = false;
                           document.querySelector("input[name='street']").parentElement.nextElementSibling.innerHTML = "Nie może być puste"
                       }
                   } else if (input.name == 'city') {
-                      const regex = /^\s*$/;
-                      if(regex.test(input.value)) {
+                      if (regexToCheckEmpty.test(input.value)) {
                           allValuesCorrect = false;
                           document.querySelector("input[name='city']").parentElement.nextElementSibling.innerHTML = "Nie może być puste"
                       }
