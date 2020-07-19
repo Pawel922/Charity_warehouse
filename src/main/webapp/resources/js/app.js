@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
           let results = slide.querySelectorAll(".form-group input");
           if (results.length !== 0) {
               results.forEach(item => {
-                  results.push(item);
+                  resultArray.push(item);
               })
           }
       });
@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function() {
               inputsToCheck = document.querySelectorAll("div[data-step='4'] input");
               inputsToCheck.forEach(input => {
                   if (input.name == 'zipCode') {
-                      const regex = /^[0-9]{2}-[0-9]{3}$/ ;
+                      const regex = /^[0-9]{2}-[0-9]{3}$/;
                       if (regexToCheckEmpty.test(input.value)) {
                           allValuesCorrect = false;
                           document.querySelector("input[name='zipCode']").parentElement.nextElementSibling.innerHTML = "Nie może być puste"
@@ -246,6 +246,9 @@ document.addEventListener("DOMContentLoaded", function() {
                       }
                   }
               });
+              if(allValuesCorrect) {
+                   this.currentStep++;
+              }
           }
           this.updateForm();
         });
