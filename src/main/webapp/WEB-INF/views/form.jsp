@@ -181,10 +181,12 @@
                 <h4>Termin odbioru</h4>
                 <div class="form-group form-group--inline">
                   <label>Data <input type="date" name="pickUpDate"/></label>
+                  <p class="warning"></p>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>Godzina<input type="time" name="pickUpTime"/></label>
+                  <p class="warning"></p>
                 </div>
 
                 <div class="form-group form-group--inline">

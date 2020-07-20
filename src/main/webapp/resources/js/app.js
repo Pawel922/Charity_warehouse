@@ -244,6 +244,11 @@ document.addEventListener("DOMContentLoaded", function() {
                           allValuesCorrect = false;
                           document.querySelector("input[name='city']").parentElement.nextElementSibling.innerHTML = "Nie może być puste"
                       }
+                  } else if (input.name == 'pickUpTime') {
+                      if (regexToCheckEmpty.test(input.value)) {
+                          allValuesCorrect = false;
+                          document.querySelector("input[name='pickUpTime']").parentElement.nextElementSibling.innerHTML = "Wyznacz godzinę"
+                      }
                   }
               });
               if(allValuesCorrect) {
