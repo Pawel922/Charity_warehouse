@@ -248,7 +248,10 @@ document.addEventListener("DOMContentLoaded", function() {
                       if (regexToCheckEmpty.test(input.value)) {
                           allValuesCorrect = false;
                           document.querySelector("input[name='pickUpDate']").parentElement.nextElementSibling.innerHTML = "Wyznacz datę"
+                      } else if (new Date(input.value) < new Date()) {
+                          document.querySelector("input[name='pickUpDate']").parentElement.nextElementSibling.innerHTML = "Niewłaściwa data"
                       }
+
                   } else if (input.name == 'pickUpTime') {
                       if (regexToCheckEmpty.test(input.value)) {
                           allValuesCorrect = false;
