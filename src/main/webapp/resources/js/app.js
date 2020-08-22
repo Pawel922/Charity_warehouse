@@ -213,6 +213,7 @@ document.addEventListener("DOMContentLoaded", function() {
               atLeastOneIsSelected ? this.currentStep++ : document.querySelector("div[data-step='3'] p.warning").innerHTML = "Nie wybrałeś instytucji";
           } else if (this.currentStep == 4) {
               let allValuesCorrect = true;
+			  let dateTypeByUser = new Date();
               const regexToCheckEmpty = /^\s*$/;
               inputsToCheck = document.querySelectorAll("div[data-step='4'] input");
               inputsToCheck.forEach(input => {
@@ -248,9 +249,13 @@ document.addEventListener("DOMContentLoaded", function() {
                       if (regexToCheckEmpty.test(input.value)) {
                           allValuesCorrect = false;
                           document.querySelector("input[name='pickUpDate']").parentElement.nextElementSibling.innerHTML = "Wyznacz datę"
-                      } else if (new Date(input.value) < new Date()) {
+                      } /*else if (new Date(input.value) < new Date()) {
                           document.querySelector("input[name='pickUpDate']").parentElement.nextElementSibling.innerHTML = "Niewłaściwa data"
-                      }
+                      } */ else {
+						  dateTypeByUser.setFullYear(input.value.substring(0,4));
+						  dateTypeByUser.setMonth(input.value.substring(5,7));
+						  dateTypeByUser.setDate(input.value.substring(9));
+					  }
 
                   } else if (input.name == 'pickUpTime') {
                       if (regexToCheckEmpty.test(input.value)) {
