@@ -214,6 +214,7 @@ document.addEventListener("DOMContentLoaded", function() {
           } else if (this.currentStep == 4) {
               let allValuesCorrect = true;
 			  let dateTypeByUser = new Date();
+			  let currentDate = new Date();
               const regexToCheckEmpty = /^\s*$/;
               inputsToCheck = document.querySelectorAll("div[data-step='4'] input");
               inputsToCheck.forEach(input => {
@@ -253,17 +254,36 @@ document.addEventListener("DOMContentLoaded", function() {
                           document.querySelector("input[name='pickUpDate']").parentElement.nextElementSibling.innerHTML = "Niewłaściwa data"
                       } */ else {
 						  dateTypeByUser.setFullYear(input.value.substring(0,4));
-						  dateTypeByUser.setMonth(input.value.substring(5,7));
-						  dateTypeByUser.setDate(input.value.substring(9));
+						  dateTypeByUser.setMonth(input.value.substring(5,7)-1);
+						  dateTypeByUser.setDate(input.value.substring(8));
 					  }
 
                   } else if (input.name == 'pickUpTime') {
                       if (regexToCheckEmpty.test(input.value)) {
                           allValuesCorrect = false;
                           document.querySelector("input[name='pickUpTime']").parentElement.nextElementSibling.innerHTML = "Wyznacz godzinę"
-                      }
+                      } else {
+						  dateTypeByUser.setHours(input.value.substring(0,2));
+						  dateTypeByUser.setMinutes(input.value.substring(3));
+					  }
                   }
               });
+
+			  console.log(dateTypeByUser);
+			  console.log(currentDate);
+
+			  if(dateTypeByUser < currentDate) {
+				allValuesCorrect = false;
+				if(dateTypeByUser.getDate() == currentDate.getDate() &&
+				   dateTypeByUser.getMonth() == currentDate.getMonth() &&
+	    	       dateTypeByUser.getFullYear() == currentDate.getFullYear()) {
+				   document.querySelector("input[name='pickUpTime']").parentElement.nextElementSibling.innerHTML = "Niewłaściwy czas"
+				} else {
+				   document.querySelector("input[name='pickUpDate']").parentElement.nextElementSibling.innerHTML = "Niewłaściwa data"
+				}
+			  }
+
+
               if(allValuesCorrect) {
                    this.currentStep++;
               }
