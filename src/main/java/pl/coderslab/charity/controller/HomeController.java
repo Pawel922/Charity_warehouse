@@ -27,6 +27,11 @@ public class HomeController {
     public String homeAction(Model model){
         return "index";
     }
+    
+    @RequestMapping("/register")
+    public String displayRegisterForm() {
+    	return "register";
+    }
 
     @ModelAttribute("institutions")
     public List<Institution> getAllInstitutions() {
