@@ -25,6 +25,12 @@
 <section class="login-page">
       <h2>Załóż konto</h2>
       <form>
+      	<div class="form-group">
+          <input type="text" name="name" placeholder="Imię" />
+        </div>
+        <div class="form-group">
+          <input type="text" name=surname" placeholder="Nazwisko" />
+        </div>
         <div class="form-group">
           <input type="email" name="email" placeholder="Email" />
         </div>
