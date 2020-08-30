@@ -3,9 +3,11 @@ package pl.coderslab.charity.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.Institution;
+import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 
@@ -29,7 +31,14 @@ public class HomeController {
     }
     
     @RequestMapping("/register")
-    public String displayRegisterForm() {
+    public String displayRegisterForm(Model model) {
+    	model.addAttribute("userToRegister", new User());
+    	return "register";
+    }
+    
+    @PostMapping("/register")
+    public String processRegisterForm(@ModelAttribute("userToRegister") User userToRegister) {
+    	System.out.println(userToRegister.getName());
     	return "register";
     }
 
