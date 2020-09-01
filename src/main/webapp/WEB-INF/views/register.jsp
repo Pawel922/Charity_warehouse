@@ -36,13 +36,11 @@
           <form:input path="email" placeholder="Email"/>
         </div>
         <div class="form-group">
-          <form:password path="password" placeholder="Hasło"/>
+          <form:password path="password" name="password" placeholder="Hasło"/>
         </div>
-        <!--
         <div class="form-group">
           <input type="password" name="password2" placeholder="Powtórz hasło" />
         </div>
-         -->
         <div class="form-group form-group--buttons">
           <a href="login.html" class="btn btn--without-border">Zaloguj się</a>
           <button class="btn" type="submit">Załóż konto</button>
@@ -51,6 +49,8 @@
 </section>
 
 <%@ include file="footer.jsp" %>
+
+<script src="<c:url value="/resources/js/app-register.js"/>"></script>
 
 </body>
 </html>
