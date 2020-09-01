@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	let form = document.querySelector("form");
 	
 	
-	subBtn.addEventListener("click", function (event){
-		event.preventDefault();
+	subBtn.addEventListener("click", function (e){
+		e.preventDefault();
 		if(passInput.value !== pass2Input.value) {
 			console.log("Popraw hasło");
 			return false;
