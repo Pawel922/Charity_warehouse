@@ -28,18 +28,23 @@
       <form:form method="post" modelAttribute="userToRegister">
       	<div class="form-group">
           <form:input path="name" placeholder="Imię"/>
+          <form:errors path="name" cssClass="warning" element="p"/>
         </div>
         <div class="form-group">
           <form:input path="surname" placeholder="Nazwisko"/>
+          <form:errors path="surname" cssClass="warning" element="p"/>
         </div>
         <div class="form-group">
           <form:input path="email" placeholder="Email"/>
+          <form:errors path="email" cssClass="warning" element="p"/>
         </div>
         <div class="form-group">
           <form:password path="password" name="password" placeholder="Hasło"/>
+          <form:errors path="password" cssClass="warning" element="p"/>
         </div>
         <div class="form-group">
-          <input type="password" name="password2" placeholder="Powtórz hasło" />
+          <input type="password" name="password2" placeholder="Powtórz hasło"/>
+          <p class="warning"></p>
         </div>
         <div class="form-group form-group--buttons">
           <a href="login.html" class="btn btn--without-border">Zaloguj się</a>

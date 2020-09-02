@@ -2,6 +2,7 @@ package pl.coderslab.charity.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,8 @@ import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -37,8 +40,11 @@ public class HomeController {
     }
     
     @PostMapping("/register")
-    public String processRegisterForm(@ModelAttribute("userToRegister") User userToRegister) {
-    	System.out.println(userToRegister.getName());
+    public String processRegisterForm(@ModelAttribute("userToRegister") @Valid User userToRegister,BindingResult result) {
+    	if(result.hasErrors()) {
+    		return "register";
+    	}
+    	System.out.println("New user saved");
     	return "register";
     }
 
