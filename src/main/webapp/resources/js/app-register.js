@@ -11,10 +11,15 @@ document.addEventListener("DOMContentLoaded", function() {
 		e.preventDefault();
 		let allValuesCorrect = true;
 		const regexToCheckEmpty = /^\s*$/;
+		const regexToCheck = /[A-Za-z]+/gm;
 		inputs.forEach(input => {
 			if(input.name === 'name') {
+				
 				if(regexToCheckEmpty.test(input.value)) {
 					input.nextElementSibling.innerText = "Nie może być puste";
+					allValuesCorrect = false;
+				} else if (!regexToCheck.test(input.value)) {
+					input.nextElementSibling.innerText = "Niepoprawna wartość";
 					allValuesCorrect = false;
 				} else {
 					input.nextElementSibling.innerText = "";
@@ -22,6 +27,9 @@ document.addEventListener("DOMContentLoaded", function() {
 			} else if (input.name === 'surname') {
 				if(regexToCheckEmpty.test(input.value)) {
 					input.nextElementSibling.innerText = "Nie może być puste";
+					allValuesCorrect = false;
+				} else if (!regexToCheck.test(input.value)) {
+					input.nextElementSibling.innerText = "Niepoprawna wartość";
 					allValuesCorrect = false;
 				} else {
 					input.nextElementSibling.innerText = "";
@@ -33,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					allValuesCorrect = false;
 				} else if (!regexToCheckEmail.test(input.value)) {
 					input.nextElementSibling.innerText = "Niewłaściwy adres email";
+					allValuesCorrect = false;
 				} else {
 					input.nextElementSibling.innerText = "";
 				}
