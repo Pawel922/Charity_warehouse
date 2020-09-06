@@ -27,9 +27,12 @@ document.addEventListener("DOMContentLoaded", function() {
 					input.nextElementSibling.innerText = "";
 				}
 			} else if (input.name === 'email') {
+				const regexToCheckEmail = /[^0-9-_\.](\S)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.([a-zA-Z]{2,}){1}/gm;
 				if(regexToCheckEmpty.test(input.value)) {
 					input.nextElementSibling.innerText = "Nie może być puste";
 					allValuesCorrect = false;
+				} else if (!regexToCheckEmail.test(input.value)) {
+					input.nextElementSibling.innerText = "Niewłaściwy adres email";
 				} else {
 					input.nextElementSibling.innerText = "";
 				}
@@ -50,6 +53,5 @@ document.addEventListener("DOMContentLoaded", function() {
 			paragraphElement.innerText = "";
 			form.submit();
 		}
-	})
-	
+	});
 })
