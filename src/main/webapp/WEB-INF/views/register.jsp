@@ -25,22 +25,23 @@
 
 <section class="login-page">
       <h2>Załóż konto</h2>
-      <form:form method="post" modelAttribute="userToRegister">
+      <form:form name="registration" method="post" modelAttribute="userToRegister">
       	<div class="form-group">
           <form:input path="name" placeholder="Imię"/>
-          <form:errors path="name" cssClass="warning" element="p"/>
+          <p class="warning"></p>
         </div>
         <div class="form-group">
           <form:input path="surname" placeholder="Nazwisko"/>
-          <form:errors path="surname" cssClass="warning" element="p"/>
+          <p class="warning"></p>
         </div>
         <div class="form-group">
           <form:input path="email" placeholder="Email"/>
-          <form:errors path="email" cssClass="warning" element="p"/>
+          <form:errors cssClass="warning" path="email" element="p"/>
+          <p class="warning"></p>
         </div>
         <div class="form-group">
           <form:password path="password" name="password" placeholder="Hasło"/>
-          <form:errors path="password" cssClass="warning" element="p"/>
+          <p class="warning"></p>
         </div>
         <div class="form-group">
           <input type="password" name="password2" placeholder="Powtórz hasło"/>

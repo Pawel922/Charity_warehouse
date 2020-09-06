@@ -269,9 +269,6 @@ document.addEventListener("DOMContentLoaded", function() {
                   }
               });
 
-			  console.log(dateTypeByUser);
-			  console.log(currentDate);
-
 			  if(dateTypeByUser < currentDate) {
 				allValuesCorrect = false;
 				if(dateTypeByUser.getDate() == currentDate.getDate() &&
