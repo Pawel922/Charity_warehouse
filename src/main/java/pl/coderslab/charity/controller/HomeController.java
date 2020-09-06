@@ -1,5 +1,6 @@
 package pl.coderslab.charity.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
+import pl.coderslab.charity.repository.UserService;
 
 import java.util.List;
 
@@ -21,11 +23,15 @@ public class HomeController {
 
     private final InstitutionRepository institutionRepository;
     private final DonationRepository donationRepository;
+    private final UserService userService;
 
+    @Autowired
     public HomeController(InstitutionRepository institutionRepository,
-                          DonationRepository donationRepository) {
+                          DonationRepository donationRepository,
+                          UserService userService) {
         this.institutionRepository = institutionRepository;
         this.donationRepository = donationRepository;
+        this.userService = userService;
     }
 
     @RequestMapping("/")
@@ -43,9 +49,10 @@ public class HomeController {
     public String processRegisterForm(@ModelAttribute("userToRegister") @Valid User userToRegister,BindingResult result) {
     	if(result.hasErrors()) {
     		return "register";
+    	} else {
+    		userService.saveUser(userToRegister);
+    		return "register";
     	}
-    	System.out.println("New user saved");
-    	return "register";
     }
 
     @ModelAttribute("institutions")

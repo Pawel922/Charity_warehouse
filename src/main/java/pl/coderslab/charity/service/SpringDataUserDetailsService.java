@@ -1,4 +1,4 @@
-package service;
+package pl.coderslab.charity.service;
 
 import java.util.HashSet;
 import java.util.Set;

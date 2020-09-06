@@ -4,7 +4,8 @@ package pl.coderslab.charity.entity;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
+import pl.coderslab.charity.validator.Unique;
 
 @Entity
 @Table(name = "users")
@@ -21,11 +22,11 @@ public class User {
 	private String surname;
 	
 	@NotBlank
+	@Unique
 	@Column(nullable = false, unique = true, length = 60)
 	private String email;
 	
 	@NotBlank
-	@Size(min=5,max=10)
 	private String password;
 	
 	private int enabled;
