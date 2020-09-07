@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		e.preventDefault();
 		let allValuesCorrect = true;
 		const regexToCheckEmpty = /^\s*$/;
-		const regexToCheck = /[A-Za-z]+/gm;
+		const regexToCheck = /[A-Za-z]+/;
 		inputs.forEach(input => {
 			if(input.name === 'name') {
 				
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					input.nextElementSibling.innerText = "";
 				}
 			} else if (input.name === 'email') {
-				const regexToCheckEmail = /[^0-9-_\.](\S)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.([a-zA-Z]{2,}){1}/gm;
+				const regexToCheckEmail = /[^0-9-_\.](\S)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.([a-zA-Z]{2,}){1}/;
 				if(regexToCheckEmpty.test(input.value)) {
 					input.nextElementSibling.innerText = "Nie może być puste";
 					allValuesCorrect = false;
@@ -46,8 +46,12 @@ document.addEventListener("DOMContentLoaded", function() {
 					input.nextElementSibling.innerText = "";
 				}
 			} else if (input.name === 'password') {
+				const regexToCheckPassword = /[\S]{5,10}/;
 				if(regexToCheckEmpty.test(input.value)) {
 					input.nextElementSibling.innerText = "Nie może być puste";
+					allValuesCorrect = false;
+				} else if (!regexToCheckPassword.test(input.value)){
+					input.nextElementSibling.innerText = "Hasło musi zawierać od 5 do 10 znaków";
 					allValuesCorrect = false;
 				} else {
 					input.nextElementSibling.innerText = "";
