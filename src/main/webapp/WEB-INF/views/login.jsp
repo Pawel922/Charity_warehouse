@@ -24,39 +24,24 @@
 </header>
 
 <section class="login-page">
-      <h2>Załóż konto</h2>
-      <form:form name="registration" method="post" modelAttribute="userToRegister">
-      	<div class="form-group">
-          <form:input path="name" placeholder="Imię"/>
-          <p class="warning"></p>
+   	  <h2>Zaloguj się</h2>
+      <form>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Email" />
         </div>
         <div class="form-group">
-          <form:input path="surname" placeholder="Nazwisko"/>
-          <p class="warning"></p>
+          <input type="password" name="password" placeholder="Hasło" />
+          <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>
-        <div class="form-group">
-          <form:input path="email" placeholder="Email"/>
-          <form:errors cssClass="warning" path="email" element="p"/>
-          <p class="warning"></p>
-        </div>
-        <div class="form-group">
-          <form:password path="password" name="password" placeholder="Hasło"/>
-          <p class="warning"></p>
-        </div>
-        <div class="form-group">
-          <input type="password" name="password2" placeholder="Powtórz hasło"/>
-          <p class="warning"></p>
-        </div>
+
         <div class="form-group form-group--buttons">
-          <a href="/login" class="btn btn--without-border">Zaloguj się</a>
-          <button class="btn" type="submit">Załóż konto</button>
+          <a href="/register" class="btn btn--without-border">Załóż konto</a>      
+          <button class="btn" type="submit">Zaloguj się</button> 
         </div>
-      </form:form>
+      </form>
 </section>
 
 <%@ include file="footer.jsp" %>
-
-<script src="<c:url value="/resources/js/app-register.js"/>"></script>
 
 </body>
 </html>

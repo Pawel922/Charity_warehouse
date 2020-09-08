@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import pl.coderslab.charity.service.SpringDataUserDetailsService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -16,10 +18,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 	
+	@Bean
+	public SpringDataUserDetailsService customUserDetailsService() {
+		return new SpringDataUserDetailsService();
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http)throws Exception {  
 		http.authorizeRequests()        
-		.antMatchers("/**").permitAll();        
+		.antMatchers("/").permitAll()
+		.antMatchers("/donation").authenticated()
+		.and().formLogin()
+		.loginPage("/login");
 	}
 
 }

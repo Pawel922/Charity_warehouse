@@ -54,6 +54,11 @@ public class HomeController {
     		return "register";
     	}
     }
+    
+    @RequestMapping("/login")
+    public String displayLoginForm() {
+    	return "login";
+    }
 
     @ModelAttribute("institutions")
     public List<Institution> getAllInstitutions() {
