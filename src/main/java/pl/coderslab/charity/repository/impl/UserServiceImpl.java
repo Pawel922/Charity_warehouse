@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	
-	public User findByUserName(String username) {
-		return userRepository.findByName(username);
+	public User findByUserName(String email) {
+		return userRepository.getByEmail(email);
 	}
 
 	public void saveUser(User user) {

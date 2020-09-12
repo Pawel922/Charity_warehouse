@@ -11,5 +11,7 @@ import pl.coderslab.charity.entity.User;
 public interface UserRepository extends JpaRepository <User, Long> {
 	User findByName(String username);
 	
+	User getByEmail(String email);
+	
 	Optional<User> findByEmail(String email);
 }
