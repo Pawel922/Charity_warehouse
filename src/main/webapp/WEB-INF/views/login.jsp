@@ -25,7 +25,7 @@
 
 <section class="login-page">
    	  <h2>Zaloguj się</h2>
-      <form method="post">
+      <form name="login" method="post">
         <div class="form-group">
           <input type="email" name="email" placeholder="Email" />
         </div>
@@ -44,6 +44,8 @@
 </section>
 
 <%@ include file="footer.jsp" %>
+
+<script src="<c:url value="/resources/js/app-login.js"/>"></script>
 
 </body>
 </html>
