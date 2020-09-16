@@ -28,7 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()        
 		.antMatchers("/").permitAll()
 		.antMatchers("/donation").authenticated()
-		.and().formLogin().loginPage("/login").usernameParameter("email").failureUrl("/login?auth=failure");
+		.and().formLogin().loginPage("/login").usernameParameter("email").failureUrl("/login?auth=failure")
+		.and().logout().logoutSuccessUrl("/");
 	}
 
 }
