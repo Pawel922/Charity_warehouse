@@ -9,8 +9,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		const regexToCheckEmpty = /^\s*$/;
 		inputs.forEach(input => {
 			if(input.name === 'email') {
+				const regexToCheckEmail = /[^0-9-_\.](\S)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.([a-zA-Z]{2,}){1}/;
 				if(regexToCheckEmpty.test(input.value)) {
 					input.nextElementSibling.innerText = "Nie może być puste";
+					allValuesCorrect = false;
+				} else if(!regexToCheckEmail.test(input.value)) {
+					input.nextElementSibling.innerText = "Niewłaściwy adres email";
 					allValuesCorrect = false;
 				} else {
 					input.nextElementSibling.innerText = "";
@@ -21,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					allValuesCorrect = false;
 				} else {
 					input.nextElementSibling.innerText = "";
-				}
+				} 
 			}
 			
 		})
