@@ -239,6 +239,7 @@
                     <li>Brak uwag</li>
                   </ul>
                 </div>
+                
               </div>
             </div>
 
@@ -246,6 +247,9 @@
               <button type="button" class="btn prev-step">Wstecz</button>
               <button type="submit" class="btn">Potwierdzam</button>
             </div>
+          </div>
+          <div>
+          	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           </div>
         </form>
       </div>

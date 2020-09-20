@@ -54,7 +54,8 @@ public class DonationController {
                               @RequestParam String phoneNumber,
                               @RequestParam String pickUpDate,
                               @RequestParam String pickUpTime,
-                              @RequestParam String pickUpComment) {
+                              @RequestParam String pickUpComment,
+                              @AuthenticationPrincipal CurrentUser customUser) {
         List<Category> categoryList = new ArrayList<>();
         for (long id : categoryId) {
             categoryRepository.findById(id).ifPresent(categoryList::add);
@@ -63,6 +64,7 @@ public class DonationController {
         donation.setCategories(categoryList);
         donation.setQuantity(quantity);
         institutionRepository.findById(institutionId).ifPresent(donation::setInstitution);
+        donation.setUser(customUser.getUser());
         donation.setStreet(street);
         donation.setCity(city);
         donation.setZipCode(zipCode);
@@ -72,6 +74,11 @@ public class DonationController {
         donation.setPickUpComment(pickUpComment);
         donationRepository.save(donation);
         return "form-confirmation";
+    }
+    
+    @RequestMapping("/test")
+    public String displayTest() {
+    	return "form-confirmation";
     }
 
     @ModelAttribute("categories")

@@ -25,6 +25,10 @@ public class Donation {
     @ManyToOne
     @JoinColumn(name = "institution_id")
     private Institution institution;
+    
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     private String street;
 
@@ -71,8 +75,16 @@ public class Donation {
     public void setInstitution(Institution institution) {
         this.institution = institution;
     }
+    
+    public User getUser() {
+		return user;
+	}
 
-    public String getStreet() {
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getStreet() {
         return street;
     }
 
@@ -127,6 +139,8 @@ public class Donation {
     public void setPickUpComment(String pickUpComment) {
         this.pickUpComment = pickUpComment;
     }
+    
+    
 
     @Override
     public boolean equals(Object o) {
