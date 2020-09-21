@@ -18,9 +18,14 @@
           <li class="logged-user">
             Witaj ${loggedUser.name}!
             <ul class="dropdown">
-              <li><a href="#">Profil</a></li>
-              <li><a href="#">Moje zbiórki</a></li>
-              <li><a href="#">Wyloguj</a></li>
+              <li><a class="btn btn--small btn--without-border" href="#">Profil</a></li>
+              <li><a class="btn btn--small btn--without-border" href="#">Moje zbiórki</a></li>
+              <li>
+              		<form action="<c:url value="/logout"/>" method="post">
+        				<input class="btn btn--small btn--without-border" type="submit" value="Wyloguj">
+        				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        			</form>
+              </li>
             </ul>
           </li>
         </ul>

@@ -27,12 +27,19 @@
         			<a href="/register" class="btn btn--small btn--without-border">Załóż konto</a>
         		</sec:authorize>
         	</li>
-        	<li>
+        	<li class="logged-user">
         		<sec:authorize access="isAuthenticated()">
-        			<form action="<c:url value="/logout"/>" method="post">
-        				<input class="btn btn--small btn--without-border" type="submit" value="Wyloguj">
-        				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        			</form>
+            		Witaj ${loggedUser.name}!
+            		<ul class="dropdown">
+              			<li><a class="btn btn--small btn--without-border" href="#">Profil</a></li>
+              			<li><a class="btn btn--small btn--without-border" href="#">Moje zbiórki</a></li>
+              			<li>
+              				<form action="<c:url value="/logout"/>" method="post">
+        						<input class="btn btn--small btn--without-border" type="submit" value="Wyloguj">
+        						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        					</form>
+              			</li>
+            		</ul>
         		</sec:authorize>
         	</li>
         </ul>

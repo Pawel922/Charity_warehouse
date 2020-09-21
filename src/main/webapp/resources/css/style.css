@@ -1120,7 +1120,6 @@ header nav ul.nav--actions .logged-user ul {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  text-align: right;
   background-color: #fff;
   padding: 12px 0 0;
   font-size: 1.4rem;

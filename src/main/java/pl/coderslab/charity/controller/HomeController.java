@@ -1,6 +1,7 @@
 package pl.coderslab.charity.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.repository.UserService;
+import pl.coderslab.charity.service.CurrentUser;
 
 import java.util.List;
 
@@ -35,7 +37,10 @@ public class HomeController {
     }
 
     @RequestMapping("/")
-    public String homeAction(Model model){
+    public String homeAction(@AuthenticationPrincipal CurrentUser customUser, Model model){
+    	if(customUser != null) {
+    		model.addAttribute("loggedUser", customUser.getUser());
+    	}
         return "index";
     }
     
