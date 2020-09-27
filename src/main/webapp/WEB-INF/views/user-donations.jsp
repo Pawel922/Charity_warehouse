@@ -48,17 +48,23 @@
     <div class="slogan container container--90">
         <table>
        		<tr>
-       			<th>Imię</th>
-       			<td>${loggedUser.name}</td>
+       			<th>Lp.</th>
+       			<th>Kategoria</th>
+       			<th>Fundacja</th>
+       			<th>Ilość worków</th>
        		</tr>
-       		<tr>
-       			<th>Nazwisko</th>
-       			<td>${loggedUser.surname}</td>
-       		</tr>
-        		<tr> 
-           			<th>Email</th>
-        			<td>${loggedUser.email}</td>
-   	    		</tr>
+       		<c:forEach items="${donations}" var="donation" varStatus="theCountExt">
+       			<tr>
+       				<td>${theCountExt.count}</td>
+       				<td>
+       					<c:forEach items="${donation.categories}" var="category" varStatus="theCountInt">
+       						${category.name}<c:if test="${not theCountInt.last}">,&nbsp</c:if> 
+       					</c:forEach>
+       				</td>
+       				<td>${donation.institution.name}</td>
+       				<td>${donation.quantity}</td>
+       			</tr>
+       		</c:forEach>
        	</table>
     </div>
 </header>
