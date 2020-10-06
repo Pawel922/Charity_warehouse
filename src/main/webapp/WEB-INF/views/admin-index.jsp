@@ -46,9 +46,9 @@
 
     <div class="slogan container container--90">
         <table>
-       		<tr><td>Institutions</td></tr>
-       		<tr><td>Donations</td></tr>
-       		<tr><td>Users</td></tr>
+       		<tr><td><a href="/*" class="btn btn--small btn--without-border">Instytucje</a></td></tr>
+       		<tr><td><a href="/*" class="btn btn--small btn--without-border">Darowizny</a></td></tr>
+       		<tr><td><a href="/*" class="btn btn--small btn--without-border">Użytkownicy</a></td></tr>
        	</table>
     </div>
 </header>
