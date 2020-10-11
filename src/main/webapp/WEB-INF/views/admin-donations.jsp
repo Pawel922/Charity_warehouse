@@ -45,14 +45,28 @@
     </nav>
 
     <div class="slogan container container--90">
-        <table>
-       		<tr><td><a href="/*" class="btn btn--small btn--without-border">Instytucje</a></td></tr>
-       		<tr><td><a href="/donation/all" class="btn btn--small btn--without-border">Darowizny</a></td></tr>
-       		<tr><td><a href="/*" class="btn btn--small btn--without-border">Użytkownicy</a></td></tr>
+		<table>
+       		<tr>
+       			<th>Lp.</th>
+       			<th>Kategoria</th>
+       			<th>Fundacja</th>
+       			<th>Ilość worków</th>
+       		</tr>
+       		<c:forEach items="${donations}" var="donation" varStatus="theCountExt">
+       			<tr>
+       				<td>${theCountExt.count}</td>
+       				<td>
+       					<c:forEach items="${donation.categories}" var="category" varStatus="theCountInt">
+       						${category.name}<c:if test="${not theCountInt.last}">,&nbsp</c:if> 
+       					</c:forEach>
+       				</td>
+       				<td>${donation.institution.name}</td>
+       				<td>${donation.quantity}</td>
+       			</tr>
+       		</c:forEach>
        	</table>
     </div>
 </header>
-
 
 <%@ include file="footer.jsp" %>
 </body>

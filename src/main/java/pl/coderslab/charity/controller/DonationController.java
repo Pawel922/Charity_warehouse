@@ -76,9 +76,10 @@ public class DonationController {
         return "form-confirmation";
     }
     
-    @RequestMapping("/test")
-    public String displayTest() {
-    	return "form-confirmation";
+    @RequestMapping("/donation/all")
+    public String displayAllDonations(Model model) {
+    	model.addAttribute("donations", donationRepository.findAll());
+    	return "admin-donations";
     }
 
     @ModelAttribute("categories")
