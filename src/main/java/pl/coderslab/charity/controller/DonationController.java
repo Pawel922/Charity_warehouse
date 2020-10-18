@@ -1,5 +1,6 @@
 package pl.coderslab.charity.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,7 @@ public class DonationController {
     private final InstitutionRepository institutionRepository;
     private final DonationRepository donationRepository;
 
+    @Autowired
     public DonationController (CategoryRepository categoryRepository,
                                InstitutionRepository institutionRepository,
                                DonationRepository donationRepository) {
