@@ -12,21 +12,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.repository.DonationRepository;
+import pl.coderslab.charity.repository.UserRepository;
 import pl.coderslab.charity.service.CurrentUser;
 
 @Controller
 public class UserController {
 	
 	private final DonationRepository donationRepository;
+	private final UserRepository userRepository;
 	
 	@Autowired
-	public UserController(DonationRepository donationRepository) {
+	public UserController(DonationRepository donationRepository, 
+			UserRepository userRepository) {
 		this.donationRepository = donationRepository;
+		this.userRepository = userRepository;
 	}
 	
 	@RequestMapping("/profile")
 	public String displayUserProfile() {
 		return "user-profile";
+	}
+	
+	@RequestMapping("/user/all")
+	public String displayAllUsers(Model model) {
+		model.addAttribute("users", userRepository.findAll());
+		return "admin-users";
 	}
 	
 	@RequestMapping("/user-donations")

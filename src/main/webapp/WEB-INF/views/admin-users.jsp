@@ -45,14 +45,30 @@
     </nav>
 
     <div class="slogan container container--90">
-        <table>
-       		<tr><td><a href="/institution/all" class="btn btn--small btn--without-border">Instytucje</a></td></tr>
-       		<tr><td><a href="/donation/all" class="btn btn--small btn--without-border">Darowizny</a></td></tr>
-       		<tr><td><a href="/user/all" class="btn btn--small btn--without-border">Użytkownicy</a></td></tr>
+		<table>
+       		<tr>
+       			<th>Lp.</th>
+       			<th>Imię</th>
+       			<th>Nazwisko</th>
+       			<th>Email</th>
+       			<th></th>
+       			<th></th>
+       			<th></th>
+       		</tr>
+       		<c:forEach items="${users}" var="user" varStatus="theCount">
+       			<tr>
+       				<td>${theCount.count}</td>
+       				<td>${user.name}</td>
+       				<td>${user.surname}</td>
+       				<td>${user.email}</td>
+       				<td>Edytuj</td>
+       				<td>Blokuj</td>
+       				<td>Usuń</td>
+       			</tr>
+       		</c:forEach>
        	</table>
     </div>
 </header>
-
 
 <%@ include file="footer.jsp" %>
 </body>
