@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix ="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -45,24 +46,22 @@
     </nav>
 
     <div class="slogan container container--90">
-		<table>
-       		<tr>
-       			<th>Lp.</th>
-       			<th>Name</th>
-       			<th>Opis</th>
-       			<th></th>
-       			<th></th>
-       		</tr>
-       		<c:forEach items="${institutions}" var="institution" varStatus="theCount">
-       			<tr>
-       				<td>${theCount.count}</td>
-       				<td>${institution.name}</td>
-       				<td>${institution.description}</td>
-       				<td><a href="/institution/edit/${institution.id}">Edytuj</a></td>
-       				<td>Usuń</td>
-       			</tr>
-       		</c:forEach>
-       	</table>
+    	<form:form modelAttribute="institution" method="post" cssClass="formTable">
+    		<table>
+    			<tr>
+    				<th>Nazwa</th>
+    				<td><form:input path="name"/></td>
+    			</tr>
+    			<tr>
+    				<th>Opis</th>
+    				<td><form:input path="description"/></td>
+    			</tr>
+    			<tr>
+    				<td><button>Wstecz</button></td>
+    				<td><button type="submit">Zapisz</button></td>
+    			</tr>
+    		</table>
+    	</form:form>
     </div>
 </header>
 

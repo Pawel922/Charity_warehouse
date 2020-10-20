@@ -1850,3 +1850,9 @@ th {
   font-weight: bold;
   text-align: left;
 }
+
+.formTable th, td {
+  border: 0px;
+  padding: 10px 15px;
+  text-align: left;
+}
