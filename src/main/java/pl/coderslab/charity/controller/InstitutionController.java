@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.coderslab.charity.entity.Institution;
@@ -38,6 +39,19 @@ public class InstitutionController {
 			model.addAttribute("institution",instToEdit.get());
 		}
 		return "institution-edit";
+	}
+	
+	@PostMapping("/institution/edit/{id}")
+	public String processFormToEdit(@PathVariable long id, 
+			@ModelAttribute Institution institution ) {
+		Optional<Institution> optInstToUpdate = institutionRepository.findById(id);
+		if(optInstToUpdate.isPresent()) {
+			Institution instToUpdate = optInstToUpdate.get();
+			instToUpdate.setName(institution.getName());
+			instToUpdate.setDescription(institution.getDescription());
+			institutionRepository.save(instToUpdate);
+		}
+		return "redirect:/institution/all";
 	}
 	
 

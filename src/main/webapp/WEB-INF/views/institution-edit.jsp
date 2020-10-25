@@ -57,7 +57,7 @@
     				<td><form:input path="description"/></td>
     			</tr>
     			<tr>
-    				<td><button>Wstecz</button></td>
+    				<td><a href="/institution/all"><button>Wstecz</button></a></td>
     				<td><button type="submit">Zapisz</button></td>
     			</tr>
     		</table>
