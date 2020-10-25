@@ -1851,8 +1851,10 @@ th {
   text-align: left;
 }
 
-.formTable th, td {
+.formTable th,
+.formTable td {
   border: 0px;
   padding: 10px 15px;
   text-align: left;
 }
+
