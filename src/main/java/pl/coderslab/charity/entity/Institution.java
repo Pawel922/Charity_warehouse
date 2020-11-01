@@ -1,6 +1,7 @@
 package pl.coderslab.charity.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "institutions")
@@ -10,8 +11,10 @@ public class Institution {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message="Nie może być puste")
     private String name;
 
+    @NotBlank(message="Nie może być puste")
     private String description;
 
     public long getId() {

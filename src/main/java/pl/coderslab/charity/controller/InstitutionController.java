@@ -2,10 +2,13 @@ package pl.coderslab.charity.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,15 +46,19 @@ public class InstitutionController {
 	
 	@PostMapping("/institution/edit/{id}")
 	public String processFormToEdit(@PathVariable long id, 
-			@ModelAttribute Institution institution ) {
-		Optional<Institution> optInstToUpdate = institutionRepository.findById(id);
-		if(optInstToUpdate.isPresent()) {
-			Institution instToUpdate = optInstToUpdate.get();
-			instToUpdate.setName(institution.getName());
-			instToUpdate.setDescription(institution.getDescription());
-			institutionRepository.save(instToUpdate);
+			@Valid @ModelAttribute Institution institution,
+			BindingResult result) {
+		if(!result.hasErrors()) {
+			Optional<Institution> optInstToUpdate = institutionRepository.findById(id);
+			if(optInstToUpdate.isPresent()) {
+				Institution instToUpdate = optInstToUpdate.get();
+				instToUpdate.setName(institution.getName());
+				instToUpdate.setDescription(institution.getDescription());
+				institutionRepository.save(instToUpdate);
+			}
+			return "redirect:/institution/all";
 		}
-		return "redirect:/institution/all";
+		return "institution-edit";
 	}
 	
 

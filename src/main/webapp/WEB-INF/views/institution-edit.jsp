@@ -53,8 +53,16 @@
     				<td><form:input path="name"/></td>
     			</tr>
     			<tr>
+    				<td></td>
+    				<td><form:errors path="name" cssClass="warning"/></td>
+    			</tr>
+    			<tr>
     				<th>Opis</th>
-    				<td><form:input path="description"/></td>
+    				<td><form:input path="description"/><td>
+    			</tr>
+    			<tr>
+    				<td></td>
+    				<td><form:errors path="description" cssClass="warning"/></td>
     			</tr>
     			<tr>
     				<td><a href="/institution/all"><button>Wstecz</button></a></td>
@@ -66,5 +74,6 @@
 </header>
 
 <%@ include file="footer.jsp" %>
+
 </body>
 </html>
