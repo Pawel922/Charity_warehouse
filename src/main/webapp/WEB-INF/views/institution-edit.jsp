@@ -65,8 +65,8 @@
     				<td><form:errors path="description" cssClass="warning"/></td>
     			</tr>
     			<tr>
-    				<td><a href="/institution/all"><button>Wstecz</button></a></td>
-    				<td><button type="submit">Zapisz</button></td>
+    				<td><a href="/institution/all" class="btn">Wstecz</a></td>
+    				<td><button type="submit" class="btn">Zapisz</button></td>
     			</tr>
     		</table>
     	</form:form>

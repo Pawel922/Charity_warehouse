@@ -1858,3 +1858,8 @@ th {
   text-align: left;
 }
 
+.btn {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+}
