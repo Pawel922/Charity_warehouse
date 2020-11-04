@@ -35,7 +35,7 @@ public class UserController {
 	
 	@RequestMapping("/user/all")
 	public String displayAllUsers(Model model) {
-		model.addAttribute("users", userRepository.findAll());
+		model.addAttribute("users", userRepository.getAllUsers());
 		return "admin-users";
 	}
 	
