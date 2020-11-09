@@ -35,6 +35,22 @@ public class InstitutionController {
 		return "admin-institutions";
 	}
 	
+	@RequestMapping("/institution/add")
+	public String displayFormToAdd(Model model) {
+		model.addAttribute("institution", new Institution());
+		return "institution-add";
+	}
+	
+	@PostMapping("/institution/add")
+	public String processFormToAdd(@Valid @ModelAttribute Institution institution,
+			BindingResult result) {
+		if(!result.hasErrors()) {
+			institutionRepository.save(institution);
+			return "redirect:/institution/all";
+		}
+		return "institution-add";
+	}
+	
 	@RequestMapping("/institution/edit/{id}")
 	public String displayFormToEdit(Model model, @PathVariable long id) {
 		Optional<Institution> instToEdit = institutionRepository.findById(id);

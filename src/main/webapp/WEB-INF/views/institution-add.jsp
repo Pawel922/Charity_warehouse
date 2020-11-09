@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix ="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -45,34 +46,34 @@
     </nav>
 
     <div class="slogan container container--90">
-		<table>
-       		<tr>
-       			<th>Lp.</th>
-       			<th>Name</th>
-       			<th>Opis</th>
-       			<th></th>
-       			<th></th>
-       		</tr>
-       		<c:forEach items="${institutions}" var="institution" varStatus="theCount">
-       			<tr>
-       				<td>${theCount.count}</td>
-       				<td>${institution.name}</td>
-       				<td>${institution.description}</td>
-       				<td><a href="/institution/edit/${institution.id}" class="btn">Edytuj</a></td>
-       				<td><a href="/*" class="btn">Usuń</a></td>
-       			</tr>
-       		</c:forEach>
-       		<tr>
-       			<td></td>
-       			<td></td>
-       			<td></td>
-       			<td><a href="/admin" class="btn">Wstecz</a></td>
-       			<td><a href="/institution/add" class="btn">Dodaj</a></td>
-       		</tr>
-       	</table>
+    	<form:form modelAttribute="institution" method="post" cssClass="formTable">
+    		<table>
+    			<tr>
+    				<th>Nazwa</th>
+    				<td><form:input path="name"/></td>
+    			</tr>
+    			<tr>
+    				<td></td>
+    				<td><form:errors path="name" cssClass="warning"/></td>
+    			</tr>
+    			<tr>
+    				<th>Opis</th>
+    				<td><form:input path="description"/><td>
+    			</tr>
+    			<tr>
+    				<td></td>
+    				<td><form:errors path="description" cssClass="warning"/></td>
+    			</tr>
+    			<tr>
+    				<td><a href="/institution/all" class="btn">Wstecz</a></td>
+    				<td><button type="submit" class="btn">Dodaj</button></td>
+    			</tr>
+    		</table>
+    	</form:form>
     </div>
 </header>
 
 <%@ include file="footer.jsp" %>
+
 </body>
 </html>

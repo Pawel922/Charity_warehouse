@@ -1844,11 +1844,13 @@ th, td {
   border: 1px solid black;
   padding: 10px 15px;
   text-align: left;
+  background-color: white;
 }
 
 th {
   font-weight: bold;
   text-align: left;
+  background-color: #F0E68C;
 }
 
 .formTable th,
