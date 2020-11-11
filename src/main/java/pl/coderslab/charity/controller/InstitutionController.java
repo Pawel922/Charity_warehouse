@@ -1,5 +1,6 @@
 package pl.coderslab.charity.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.entity.User;
+import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.service.CurrentUser;
 
@@ -23,10 +26,13 @@ import pl.coderslab.charity.service.CurrentUser;
 public class InstitutionController {
 	
 	private final InstitutionRepository institutionRepository;
+	private final DonationRepository donationRepository;
 	
 	@Autowired
-	public InstitutionController(InstitutionRepository institutionRepository) {
+	public InstitutionController(InstitutionRepository institutionRepository,
+			DonationRepository donationRepository) {
 		this.institutionRepository = institutionRepository;
+		this.donationRepository = donationRepository;
 	}
 	
 	@RequestMapping("/institution/all")
@@ -75,6 +81,21 @@ public class InstitutionController {
 			return "redirect:/institution/all";
 		}
 		return "institution-edit";
+	}
+	
+	@RequestMapping("/institution/delete/{id}")
+	public String deleteInstitution(@PathVariable long id) {
+		Optional<Institution> instToDelete = institutionRepository.findById(id);
+		if(instToDelete.isPresent()) {
+			List<Donation> donationToDelete = donationRepository.findAllByInstitutionId(instToDelete.get().getId());
+			if(!donationToDelete.isEmpty()) {
+				for (Donation donation : donationToDelete) {
+					donationRepository.delete(donation);
+				}
+			}
+			institutionRepository.delete(instToDelete.get());
+		}
+		return "redirect:/institution/all";
 	}
 	
 

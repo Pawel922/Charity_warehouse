@@ -59,7 +59,7 @@
        				<td>${institution.name}</td>
        				<td>${institution.description}</td>
        				<td><a href="/institution/edit/${institution.id}" class="btn">Edytuj</a></td>
-       				<td><a href="/*" class="btn">Usuń</a></td>
+       				<td><a href="/institution/delete/${institution.id}" class="btn">Usuń</a></td>
        			</tr>
        		</c:forEach>
        		<tr>
