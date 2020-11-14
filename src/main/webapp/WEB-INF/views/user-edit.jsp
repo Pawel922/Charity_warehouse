@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix ="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -45,31 +46,30 @@
     </nav>
 
     <div class="slogan container container--90">
-		<table>
-       		<tr>
-       			<th>Lp.</th>
-       			<th>Imię</th>
-       			<th>Nazwisko</th>
-       			<th>Email</th>
-       			<th></th>
-       			<th></th>
-       			<th></th>
-       		</tr>
-       		<c:forEach items="${users}" var="user" varStatus="theCount">
-       			<tr>
-       				<td>${theCount.count}</td>
-       				<td>${user.name}</td>
-       				<td>${user.surname}</td>
-       				<td>${user.email}</td>
-       				<td><a href="/user/edit/${user.id}" class="btn">Edytuj</a></td>
-       				<td>Blokuj</td>
-       				<td>Usuń</td>
-       			</tr>
-       		</c:forEach>
-       	</table>
+    	<form:form modelAttribute="user" method="post" cssClass="formTable">
+    		<table>
+    			<tr>
+    				<th>Imię</th>
+    				<td><form:input path="name"/></td>
+    			</tr>
+    			<tr>
+    				<th>Nazwisko</th>
+    				<td><form:input path="surname"/><td>
+    			</tr>
+    			<tr>
+    				<th>Email</th>
+    				<td><form:input path="email"/><td>
+    			</tr>
+    			<tr>
+    				<td><a href="/user/all" class="btn">Wstecz</a></td>
+    				<td><button type="submit" class="btn">Zapisz</button></td>
+    			</tr>
+    		</table>
+    	</form:form>
     </div>
 </header>
 
 <%@ include file="footer.jsp" %>
+
 </body>
 </html>
