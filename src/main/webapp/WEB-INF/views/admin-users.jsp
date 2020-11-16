@@ -63,7 +63,7 @@
        				<td>${user.email}</td>
        				<td><a href="/user/edit/${user.id}" class="btn">Edytuj</a></td>
        				<td>Blokuj</td>
-       				<td>Usuń</td>
+       				<td><a href="/user/delete/${user.id}" class="btn">Usuń</a></td>
        			</tr>
        		</c:forEach>
        	</table>

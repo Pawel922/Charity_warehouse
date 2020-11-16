@@ -40,6 +40,12 @@ public class UserController {
 	@RequestMapping("/user/all")
 	public String displayAllUsers(Model model) {
 		model.addAttribute("users", userRepository.getAllUsers());
+		List<User> users = userRepository.getAllUsers();
+		if(!users.isEmpty()) {
+			for(User user : users) {
+				System.out.println(user.getName());
+			}
+		}
 		return "admin-users";
 	}
 	
@@ -62,6 +68,21 @@ public class UserController {
 			editedUser.setSurname(user.getSurname());
 			editedUser.setEmail(user.getEmail());
 			userRepository.save(editedUser);
+		}
+		return "redirect:/user/all";
+	}
+	
+	@RequestMapping("/user/delete/{id}")
+	public String deleteUser(@PathVariable long id) {
+		Optional<User> userToDelete = userRepository.findById(id);
+		if(userToDelete.isPresent()) {
+			List<Donation> donationToDelete = donationRepository.findAllByUserId(id);
+			if(!donationToDelete.isEmpty()) {
+				for (Donation donation : donationToDelete) {
+					donationRepository.delete(donation);
+				}
+			}
+			userRepository.delete(userToDelete.get());
 		}
 		return "redirect:/user/all";
 	}
