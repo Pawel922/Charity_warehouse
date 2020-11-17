@@ -3,7 +3,6 @@ package pl.coderslab.charity.controller;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.repository.DonationRepository;
+import pl.coderslab.charity.repository.RoleRepository;
 import pl.coderslab.charity.repository.UserRepository;
 import pl.coderslab.charity.service.CurrentUser;
 
@@ -24,12 +24,15 @@ public class UserController {
 	
 	private final DonationRepository donationRepository;
 	private final UserRepository userRepository;
+//	private final RoleRepository roleRepository;
 	
 	@Autowired
 	public UserController(DonationRepository donationRepository, 
-			UserRepository userRepository) {
+			UserRepository userRepository,
+			RoleRepository roleRepository) {
 		this.donationRepository = donationRepository;
 		this.userRepository = userRepository;
+//		this.roleRepository = roleRepository;
 	}
 	
 	@RequestMapping("/profile")
@@ -40,12 +43,6 @@ public class UserController {
 	@RequestMapping("/user/all")
 	public String displayAllUsers(Model model) {
 		model.addAttribute("users", userRepository.getAllUsers());
-		List<User> users = userRepository.getAllUsers();
-		if(!users.isEmpty()) {
-			for(User user : users) {
-				System.out.println(user.getName());
-			}
-		}
 		return "admin-users";
 	}
 	
@@ -76,6 +73,8 @@ public class UserController {
 	public String deleteUser(@PathVariable long id) {
 		Optional<User> userToDelete = userRepository.findById(id);
 		if(userToDelete.isPresent()) {
+	
+			//find all donations which belong to user and remove them
 			List<Donation> donationToDelete = donationRepository.findAllByUserId(id);
 			if(!donationToDelete.isEmpty()) {
 				for (Donation donation : donationToDelete) {
