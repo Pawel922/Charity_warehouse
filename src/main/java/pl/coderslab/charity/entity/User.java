@@ -3,6 +3,8 @@ package pl.coderslab.charity.entity;
 
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import pl.coderslab.charity.validator.Unique;
 
@@ -14,11 +16,14 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@NotBlank(message="Nie może być puste")
 	private String name;
 	
+	@NotBlank(message="Nie może być puste")
 	private String surname;
 	
 	@Unique
+	@Email(message="Niepoprawny adres email")
 	@Column(nullable = false, unique = true, length = 60)
 	private String email;
 	

@@ -53,12 +53,24 @@
     				<td><form:input path="name"/></td>
     			</tr>
     			<tr>
+    				<td></td>
+    				<td><form:errors path="name" cssClass="warning"/></td>
+    			</tr>
+    			<tr>
     				<th>Nazwisko</th>
     				<td><form:input path="surname"/><td>
     			</tr>
     			<tr>
+    				<td></td>
+    				<td><form:errors path="surname" cssClass="warning"/></td>
+    			</tr>
+    			<tr>
     				<th>Email</th>
     				<td><form:input path="email"/><td>
+    			</tr>
+    			<tr>
+    				<td></td>
+    				<td><form:errors path="email" cssClass="warning"/></td>
     			</tr>
     			<tr>
     				<td><a href="/user/all" class="btn">Wstecz</a></td>

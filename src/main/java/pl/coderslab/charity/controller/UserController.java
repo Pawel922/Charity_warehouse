@@ -1,12 +1,17 @@
 package pl.coderslab.charity.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.repository.DonationRepository;
-import pl.coderslab.charity.repository.RoleRepository;
 import pl.coderslab.charity.repository.UserRepository;
 import pl.coderslab.charity.service.CurrentUser;
 
@@ -24,15 +28,12 @@ public class UserController {
 	
 	private final DonationRepository donationRepository;
 	private final UserRepository userRepository;
-//	private final RoleRepository roleRepository;
 	
 	@Autowired
 	public UserController(DonationRepository donationRepository, 
-			UserRepository userRepository,
-			RoleRepository roleRepository) {
+			UserRepository userRepository) {
 		this.donationRepository = donationRepository;
 		this.userRepository = userRepository;
-//		this.roleRepository = roleRepository;
 	}
 	
 	@RequestMapping("/profile")
@@ -57,16 +58,42 @@ public class UserController {
 	
 	@PostMapping("/user/edit/{id}")
 	public String processFormToEdit(@PathVariable long id, 
-			@ModelAttribute User user) {
+			@Valid @ModelAttribute User user,
+			BindingResult result) {
+		User userFromBinding = (User) result.getTarget();
 		Optional<User> userToEdit = userRepository.findById(id);
 		if(userToEdit.isPresent()) {
 			User editedUser = userToEdit.get();
-			editedUser.setName(user.getName());
-			editedUser.setSurname(user.getSurname());
-			editedUser.setEmail(user.getEmail());
-			userRepository.save(editedUser);
+			List<Boolean> checkList = new ArrayList<Boolean>();
+			
+			if(result.hasErrors()) {
+				List<ObjectError> errors = result.getAllErrors();
+				for(ObjectError error : errors) {
+					System.out.println("Nazwa bledu: " + error.getCode());
+					if(error.getCode().equals("Unique")) {
+						String previousEmail = userFromBinding.getEmail();
+						if(editedUser.getEmail().equals(previousEmail)) {
+							checkList.add(true);
+						} else {
+							checkList.add(false);
+						}
+					} else {
+						checkList.add(false);
+					}
+				}
+			}
+			
+			if(!checkList.contains(false)) {
+				editedUser.setName(user.getName());
+				editedUser.setSurname(user.getSurname());
+				editedUser.setEmail(user.getEmail());
+				userRepository.save(editedUser);
+				return "redirect:/user/all";
+			} else {
+				return "user-edit";
+			}			
 		}
-		return "redirect:/user/all";
+		return "user-edit";
 	}
 	
 	@RequestMapping("/user/delete/{id}")
