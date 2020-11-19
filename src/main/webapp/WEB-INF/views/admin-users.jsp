@@ -61,7 +61,7 @@
        				<td>${user.name}</td>
        				<td>${user.surname}</td>
        				<td>${user.email}</td>
-       				<td><a href="/user/edit/${user.id}" class="btn">Edytuj</a></td>
+       				<td><a href="/user/edit/${user.id}/false" class="btn">Edytuj</a></td>
        				<td>Blokuj</td>
        				<td><a href="/user/delete/${user.id}" class="btn">Usuń</a></td>
        			</tr>

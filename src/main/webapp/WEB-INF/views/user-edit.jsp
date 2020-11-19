@@ -68,10 +68,12 @@
     				<th>Email</th>
     				<td><form:input path="email"/><td>
     			</tr>
-    			<tr>
-    				<td></td>
-    				<td><form:errors path="email" cssClass="warning"/></td>
-    			</tr>
+    			<c:if test="${not ignorableError}">
+    				<tr>
+    					<td></td>
+    					<td><form:errors path="email" cssClass="warning"/></td>
+    				</tr>
+    			</c:if>
     			<tr>
     				<td><a href="/user/all" class="btn">Wstecz</a></td>
     				<td><button type="submit" class="btn">Zapisz</button></td>

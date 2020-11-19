@@ -47,8 +47,10 @@ public class UserController {
 		return "admin-users";
 	}
 	
-	@RequestMapping("/user/edit/{id}")
-	public String displayFormToEdit(Model model, @PathVariable long id) {
+	@RequestMapping("/user/edit/{id}/{ignorableError}")
+	public String displayFormToEdit(Model model, 
+			@PathVariable long id,
+			@PathVariable boolean ignorableError) {
 		Optional<User> userToEdit = userRepository.findById(id);
 		if(userToEdit.isPresent()) {
 			model.addAttribute("user", userToEdit.get());
@@ -56,24 +58,29 @@ public class UserController {
 		return "user-edit";
 	}
 	
-	@PostMapping("/user/edit/{id}")
-	public String processFormToEdit(@PathVariable long id, 
+	@PostMapping("/user/edit/{id}/{ignorableError}")
+	public String processFormToEdit(Model model, @PathVariable long id, 
 			@Valid @ModelAttribute User user,
 			BindingResult result) {
 		User userFromBinding = (User) result.getTarget();
 		Optional<User> userToEdit = userRepository.findById(id);
+		
 		if(userToEdit.isPresent()) {
 			User editedUser = userToEdit.get();
+			
+			//checkList to collect information whether all inputs have correct value
 			List<Boolean> checkList = new ArrayList<Boolean>();
 			
+			//check if user's email was not changed - then ignore error
 			if(result.hasErrors()) {
 				List<ObjectError> errors = result.getAllErrors();
+				
 				for(ObjectError error : errors) {
-					System.out.println("Nazwa bledu: " + error.getCode());
 					if(error.getCode().equals("Unique")) {
 						String previousEmail = userFromBinding.getEmail();
 						if(editedUser.getEmail().equals(previousEmail)) {
 							checkList.add(true);
+							model.addAttribute("ignorableError", true);
 						} else {
 							checkList.add(false);
 						}

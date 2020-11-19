@@ -24,6 +24,7 @@ public class User {
 	
 	@Unique
 	@Email(message="Niepoprawny adres email")
+	@NotBlank(message="Nie może być puste")
 	@Column(nullable = false, unique = true, length = 60)
 	private String email;
 	
