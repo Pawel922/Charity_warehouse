@@ -120,6 +120,29 @@ public class UserController {
 		return "redirect:/user/all";
 	}
 	
+	@RequestMapping("/user/enable/{id}")
+	public String setUserEnable(@PathVariable long id) {
+		Optional<User> optUserToSetEnable = userRepository.findById(id);
+		if(optUserToSetEnable.isPresent()) {
+			User userToSetEnable = optUserToSetEnable.get();
+			userToSetEnable.setEnabled(1);
+			userRepository.save(userToSetEnable);
+		}
+		return "redirect:/user/all";
+		
+	}
+	
+	@RequestMapping("/user/disable/{id}")
+	public String setUserDisable(@PathVariable long id) {
+		Optional<User> optUserToSetDisable = userRepository.findById(id);
+		if(optUserToSetDisable.isPresent()) {
+			User userToSetDisable = optUserToSetDisable.get();
+			userToSetDisable.setEnabled(0);
+			userRepository.save(userToSetDisable);
+		}
+		return "redirect:/user/all";
+	}
+	
 
 	@RequestMapping("/user-donations")
 	public String displayDonationsGivenByUser(@AuthenticationPrincipal CurrentUser customUser, Model model) {

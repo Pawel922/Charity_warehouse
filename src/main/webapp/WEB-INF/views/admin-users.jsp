@@ -62,7 +62,14 @@
        				<td>${user.surname}</td>
        				<td>${user.email}</td>
        				<td><a href="/user/edit/${user.id}/false" class="btn">Edytuj</a></td>
-       				<td>Blokuj</td>
+       				<c:choose>
+       					<c:when test="${user.enabled == 1}">
+       						<td><a href="/user/disable/${user.id}" style="background-color: green" class="btn">Blokuj</a></td>
+       					</c:when>
+       					<c:when test="${user.enabled == 0}">
+       						<td ><a href="/user/enable/${user.id}" style="background-color: red" class="btn">Odblokuj</a></td>
+       					</c:when>
+       				</c:choose>
        				<td><a href="/user/delete/${user.id}" class="btn">Usuń</a></td>
        			</tr>
        		</c:forEach>
