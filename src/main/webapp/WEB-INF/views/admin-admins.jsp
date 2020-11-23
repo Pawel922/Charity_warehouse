@@ -48,22 +48,31 @@
 		<table>
        		<tr>
        			<th>Lp.</th>
-       			<th>Kategoria</th>
-       			<th>Fundacja</th>
-       			<th>Ilość worków</th>
+       			<th>Imię</th>
+       			<th>Nazwisko</th>
+       			<th>Email</th>
+       			<th></th>
+       			<th></th>
+       			<th></th>
        		</tr>
-       		<c:forEach items="${donations}" var="donation" varStatus="theCountExt">
+       		<c:forEach items="${admins}" var="admin" varStatus="theCount">
        			<tr>
-       				<td>${theCountExt.count}</td>
-       				<td>
-       					<c:forEach items="${donation.categories}" var="category" varStatus="theCountInt">
-       						${category.name}<c:if test="${not theCountInt.last}">,&nbsp</c:if> 
-       					</c:forEach>
-       				</td>
-       				<td>${donation.institution.name}</td>
-       				<td>${donation.quantity}</td>
+       				<td>${theCount.count}</td>
+       				<td>${admin.name}</td>
+       				<td>${admin.surname}</td>
+       				<td>${admin.email}</td>
+       				<td><a href="/*" class="btn">Edytuj</a></td>
+       				<td><a href="/*" class="btn">Usuń</a></td>
        			</tr>
        		</c:forEach>
+       		<tr>
+       				<td></td>
+       				<td></td>
+       				<td></td>
+       				<td></td>
+       				<td><a href="/admin" class="btn">Wstecz</a></td>
+       				<td><a href="/*" class="btn">Dodaj</a></td>
+       		</tr>
        	</table>
     </div>
 </header>

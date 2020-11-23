@@ -79,12 +79,6 @@ public class DonationController {
         return "form-confirmation";
     }
     
-    @RequestMapping("/donation/all")
-    public String displayAllDonations(Model model) {
-    	model.addAttribute("donations", donationRepository.findAll());
-    	return "admin-donations";
-    }
-
     @ModelAttribute("categories")
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
