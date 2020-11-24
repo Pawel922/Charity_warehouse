@@ -61,8 +61,8 @@
        				<td>${admin.name}</td>
        				<td>${admin.surname}</td>
        				<td>${admin.email}</td>
-       				<td><a href="/*" class="btn">Edytuj</a></td>
-       				<td><a href="/*" class="btn">Usuń</a></td>
+       				<td><a href="/user/edit/${admin.id}/false" class="btn">Edytuj</a></td>
+       				<td><a href="/user/delete/${admin.id}" class="btn">Usuń</a></td>
        			</tr>
        		</c:forEach>
        		<tr>

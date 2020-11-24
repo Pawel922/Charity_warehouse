@@ -95,7 +95,7 @@ public class UserController {
 				editedUser.setSurname(user.getSurname());
 				editedUser.setEmail(user.getEmail());
 				userRepository.save(editedUser);
-				return "redirect:/user/all";
+				return editedUser.getRoles().stream().allMatch(r->r.getName().equals("ROLE_ADMIN")) ? "redirect:/admin/all" : "redirect:/user/all";
 			} else {
 				return "user-edit";
 			}			
@@ -155,5 +155,4 @@ public class UserController {
 	public User getLoggedUser(@AuthenticationPrincipal CurrentUser customUser) {
 		return customUser.getUser();
 	}
-
 }

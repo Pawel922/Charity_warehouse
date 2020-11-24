@@ -75,7 +75,15 @@
     				</tr>
     			</c:if>
     			<tr>
-    				<td><a href="/user/all" class="btn">Wstecz</a></td>
+    			<c:choose>
+    				<c:when test="${user.roles.stream().allMatch(r->r.name.equals('ROLE_ADMIN')).orElse(false)}">
+    					<td><a href="/admin/all" class="btn">Wstecz</a></td>
+    				</c:when>
+    				<c:when test="${not user.roles.stream().allMatch(r->r.name.equals('ROLE_ADMIN')).orElse(false)}">
+    					<td><a href="/user/all" class="btn">Wstecz</a></td>
+    				</c:when>
+    			</c:choose>
+    				
     				<td><button type="submit" class="btn">Zapisz</button></td>
     			</tr>
     		</table>
