@@ -105,8 +105,11 @@ public class UserController {
 	
 	@RequestMapping("/user/delete/{id}")
 	public String deleteUser(@PathVariable long id) {
-		Optional<User> userToDelete = userRepository.findById(id);
-		if(userToDelete.isPresent()) {
+		Optional<User> optUserToDelete = userRepository.findById(id);
+		boolean userToDeleteIsAdmin = false;
+		if(optUserToDelete.isPresent()) {
+			User userToDelete = optUserToDelete.get();
+			userToDeleteIsAdmin = userToDelete.getRoles().stream().anyMatch(r->r.getName().equals("ROLE_ADMIN"));
 	
 			//find all donations which belong to user and remove them
 			List<Donation> donationToDelete = donationRepository.findAllByUserId(id);
@@ -115,9 +118,10 @@ public class UserController {
 					donationRepository.delete(donation);
 				}
 			}
-			userRepository.delete(userToDelete.get());
+			
+			userRepository.delete(userToDelete);
 		}
-		return "redirect:/user/all";
+		return userToDeleteIsAdmin ? "redirect:/admin/all" : "redirect:/user/all";
 	}
 	
 	@RequestMapping("/user/enable/{id}")
