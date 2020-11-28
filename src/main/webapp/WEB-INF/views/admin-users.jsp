@@ -73,6 +73,15 @@
        				<td><a href="/user/delete/${user.id}" class="btn">Usuń</a></td>
        			</tr>
        		</c:forEach>
+       		<tr>
+       			<td></td>
+       			<td></td>
+       			<td></td>
+       			<td></td>
+       			<td></td>
+       			<td></td>
+       			<td><a href="/admin" class="btn">Wstecz</a></td>
+       		</tr>
        	</table>
     </div>
 </header>
