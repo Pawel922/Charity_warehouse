@@ -34,8 +34,8 @@
 
       <div class="slogan container container--90">
           <h2>
-            Dziękujemy za przesłanie formularza. Na maila prześlemy wszelkie
-            informacje o odbiorze.
+            Z pewnych powodów możliwość oddania przez Ciebie darowizny została zablokowana. 
+            Skontaktuj sie z administratorem. 
           </h2>
       </div>
     </header>

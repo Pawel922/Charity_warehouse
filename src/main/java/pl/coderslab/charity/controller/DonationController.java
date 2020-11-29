@@ -43,8 +43,9 @@ public class DonationController {
     @RequestMapping("/donation")
     public String displayForm(@AuthenticationPrincipal CurrentUser customUser,
     		Model model) {
-    	model.addAttribute("loggedUser", customUser.getUser());
-        return "form";
+    	User loggedUser = customUser.getUser();
+    	model.addAttribute("loggedUser", loggedUser);
+    	return loggedUser.getEnabled() == 1 ? "form" : "form-cancelation"; 
     }
 
     @PostMapping("/donation")
