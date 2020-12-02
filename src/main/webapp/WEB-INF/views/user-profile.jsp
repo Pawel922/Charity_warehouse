@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix ="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -45,20 +46,48 @@
     </nav>
 
     <div class="slogan container container--90">
-		<table>
-       		<tr>
-       			<th>Imię</th>
-       			<td>${loggedUser.name}</td>
-       		</tr>
-       		<tr>
-       			<th>Nazwisko</th>
-       			<td>${loggedUser.surname}</td>
-       		</tr>
-        		<tr> 
-           			<th>Email</th>
-        			<td>${loggedUser.email}</td>
-   	    		</tr>
-       	</table>
+		    	<form:form modelAttribute="loggedUser" method="post" cssClass="formTable">
+    		<table>
+    			<tr>
+    				<th>Imię</th>
+    				<td><form:input path="name"/></td>
+    			</tr>
+    			<tr>
+    				<td></td>
+    				<td><form:errors path="name" cssClass="warning"/></td>
+    			</tr>
+    			<tr>
+    				<th>Nazwisko</th>
+    				<td><form:input path="surname"/><td>
+    			</tr>
+    			<tr>
+    				<td></td>
+    				<td><form:errors path="surname" cssClass="warning"/></td>
+    			</tr>
+    			<tr>
+    				<th>Email</th>
+    				<td><form:input path="email"/><td>
+    			</tr>
+    			<tr>
+    				<td></td>
+    				<td><form:errors path="email" cssClass="warning"/></td>
+    			</tr>
+    			<tr>
+    				<th>Hasło</th>
+    				<td><a href="/" class="btn">Zmień</a></td>
+    			</tr>
+    			<c:if test="${not ignorableError}">
+    				<tr>
+    					<td></td>
+    					<td><form:errors path="email" cssClass="warning"/></td>
+    				</tr>
+    			</c:if>
+    			<tr>
+    				<td><a href="/" class="btn">Wstecz</a></td>
+    				<td><button type="submit" class="btn">Zapisz</button></td>
+    			</tr>
+    		</table>
+    	</form:form>
     </div>
 </header>
 
