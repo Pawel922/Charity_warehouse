@@ -124,17 +124,17 @@ public class UserController {
 		return userToDeleteIsAdmin ? "redirect:/admin/all" : "redirect:/user/all";
 	}
 	
-	@RequestMapping("/user/enable/{id}")
-	public String setUserEnable(@PathVariable long id) {
-		Optional<User> optUserToSetEnable = userRepository.findById(id);
-		if(optUserToSetEnable.isPresent()) {
-			User userToSetEnable = optUserToSetEnable.get();
-			userToSetEnable.setEnabled(1);
-			userRepository.save(userToSetEnable);
-		}
-		return "redirect:/user/all";
-		
-	}
+//	@PostMapping("/user/enable/{id}")
+//	public String setUserEnable(@PathVariable long id) {
+//		Optional<User> optUserToSetEnable = userRepository.findById(id);
+//		if(optUserToSetEnable.isPresent()) {
+//			User userToSetEnable = optUserToSetEnable.get();
+//			userToSetEnable.setEnabled(1);
+//			userRepository.save(userToSetEnable);
+//		}
+//		return "redirect:/user/all";
+//		
+//	}
 	
 	@RequestMapping("/user/disable/{id}")
 	public String setUserDisable(@PathVariable long id) {

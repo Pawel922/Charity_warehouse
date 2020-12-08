@@ -64,10 +64,10 @@
        				<td><a href="/user/edit/${user.id}/false" class="btn">Edytuj</a></td>
        				<c:choose>
        					<c:when test="${user.enabled == 1}">
-       						<td><a data-status="disable" href="/user/disable/${user.id}" style="background-color: green" class="btn">Blokuj</a></td>
+       						<td><button data-status="disable" data-href="/user/disable/${user.id}" style="background-color: green" class="btn">Blokuj</button></td>
        					</c:when>
        					<c:when test="${user.enabled == 0}">
-       						<td ><a data-status="enable" href="/user/enable/${user.id}" style="background-color: red" class="btn">Odblokuj</a></td>
+       						<td ><button data-status="enable" data-href="/user/enable/${user.id}" style="background-color: red" class="btn">Odblokuj</button></td>
        					</c:when>
        				</c:choose>
        				<td><a href="/user/delete/${user.id}" class="btn">Usuń</a></td>
