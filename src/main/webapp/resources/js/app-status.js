@@ -1,40 +1,30 @@
 document.addEventListener("DOMContentLoaded", function() {
-	let disableBtn = document.querySelector("[data-status='disable']");
-	let enableBtn = document.querySelector("[data-status='enable']");
+	let disableBtns = document.querySelectorAll("[data-status='disable']");
+	let enableBtns = document.querySelectorAll("[data-status='enable']");
+	const urlServer = "http://localhost:8080";
 	
-	disableBtn.addEventListener("click", function(evt){
-		const xhr = new XMLHttpRequest();
-
-		xhr.addEventListener("load", e => {
-    	if (xhr.status === 200) {
-        	console.log("Wynik połączenia:");
-        	console.log(xhr.response);
-    		}
-		});
-
-		xhr.addEventListener("error", e => {
-    		alert("Niestety nie udało się nawiązać połączenia");
-		});
-
-		xhr.open("GET", "http://localhost:8080/user/disable/1", true);
-		xhr.send();
+	disableBtns.forEach(btn => {
+		btn.addEventListener("click", function(){	
+			changeStatus(this.dataset.href,this, "red","Odblokuj");
+		})
 	})
 	
-	enableBtn.addEventListener("click", function(evt){
-		const xhr = new XMLHttpRequest();
-
-		xhr.addEventListener("load", e => {
-    	if (xhr.status === 200) {
-        	console.log("Wynik połączenia:");
-        	console.log(xhr.response);
-    		}
-		});
-
-		xhr.addEventListener("error", e => {
-    		alert("Niestety nie udało się nawiązać połączenia");
-		});
-
-		xhr.open("GET", "http://localhost:8080/user/enable/1", true);
-		xhr.send();
+	enableBtns.forEach(btn => {
+		btn.addEventListener("click", function(){
+			changeStatus(this.dataset.href,this, "green","Blokuj");
+		})
 	})
+	
+	function changeStatus(href, elem, color, text) {
+		const xhr = new XMLHttpRequest();
+			xhr.open("GET", urlServer + href, true);
+			xhr.send();
+			xhr.addEventListener("load", e => {
+    		if (xhr.status === 200) {
+				elem.style.background = color;
+				elem.innerText = text;
+				window.location.reload();
+    			}
+			});
+	}
 })
