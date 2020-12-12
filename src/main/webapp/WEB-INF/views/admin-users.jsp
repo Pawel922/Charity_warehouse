@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
@@ -70,7 +71,7 @@
        						<td ><button data-status="enable" data-href="/user/enable/${user.id}" style="background-color: red" class="btn">Odblokuj</button></td>
        					</c:when>
        				</c:choose>
-       				<td><a href="/user/delete/${user.id}" class="btn">Usuń</a></td>
+       				<td><button data-name="removeBtn" data-href="/user/delete/${user.id}" class="btn">Usuń</button></td>
        			</tr>
        		</c:forEach>
        		<tr>
@@ -85,6 +86,21 @@
        	</table>
     </div>
 </header>
+
+<div id="confirmModal" class="modal">
+ 	<!-- Modal content -->
+	<div class="modal-content">
+  		<div class="modal-header">
+  			<h2>Potwierdzenie</h2>
+    		<span class="close">&times;</span>
+  		</div>
+  		<div class="modal-body">
+    		<p>Jesteś pewien, że chcesz usunąć tego użytkownika?</p>
+    		<a href="/">Nie</a>
+    		<a href="/">Tak</a>
+  		</div>
+  	</div>
+</div>
 
 <%@ include file="footer.jsp" %>
 
