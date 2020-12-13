@@ -1891,9 +1891,9 @@ th {
 
 /* The Close Button */
 .close {
-  color: #aaa;
+  color: #ffffff;
   float: right;
-  font-size: 28px;
+  font-size: 45px;
   font-weight: bold;
 }
 
@@ -1906,13 +1906,19 @@ th {
 
  /* Modal Header */
 .modal-header {
-  padding: 2px 16px;
+  padding: 4px 8px;
   background-color: #5cb85c;
   color: white;
 }
 
 /* Modal Body */
 .modal-body {padding: 2px 16px;}
+
+.modal-body p,a{
+  padding: 10px 15px;
+  text-align: left;
+  font-size: 20px;
+  background-color: white;}
 
 /* Modal Footer */
 .modal-footer {

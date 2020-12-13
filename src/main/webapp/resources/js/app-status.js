@@ -28,7 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	// When the user clicks on the button, open the modal to confirm action
 	deleteBtns.forEach(btn => {
 		btn.addEventListener("click", function(){
-			console.log("otwieram okno");
+			//set link attribute to correct address
+			modal.querySelector("[data-name='Yes']").href = this.dataset.href;
 			modal.style.display = "block";
 		})
 	})

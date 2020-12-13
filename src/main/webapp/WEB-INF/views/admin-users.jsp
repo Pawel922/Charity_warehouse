@@ -95,9 +95,9 @@
     		<span class="close">&times;</span>
   		</div>
   		<div class="modal-body">
-    		<p>Jesteś pewien, że chcesz usunąć tego użytkownika?</p>
-    		<a href="/">Nie</a>
-    		<a href="/">Tak</a>
+    		<p>Jesteś pewien, że chcesz usunąć użytkownika?</p>
+    		<a data-name="No" href="/user/all" class="btn">Nie</a>
+    		<a data-name="Yes" href="" class="btn">Tak</a>
   		</div>
   	</div>
 </div>
