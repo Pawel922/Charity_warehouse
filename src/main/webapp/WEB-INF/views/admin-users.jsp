@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
@@ -87,7 +86,7 @@
     </div>
 </header>
 
-<div id="confirmModal" class="modal">
+<div id="myModal" class="modal">
  	<!-- Modal content -->
 	<div class="modal-content">
   		<div class="modal-header">
@@ -105,6 +104,7 @@
 <%@ include file="footer.jsp" %>
 
 <script src="/resources/js/app-status.js"></script>
+<script src="/resources/js/app-modal.js"></script>
 
 </body>
 </html>

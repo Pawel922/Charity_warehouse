@@ -74,7 +74,7 @@
     			</tr>
     			<tr>
     				<th>Hasło</th>
-    				<td><a href="/" class="btn">Zmień</a></td>
+    				<td><button data-name="changeBtn" class="btn">Zmień</button></td>
     			</tr>
     			<c:if test="${not ignorableError}">
     				<tr>
@@ -91,8 +91,23 @@
     </div>
 </header>
 
+<div id="myModal" class="modal">
+ 	<!-- Modal content -->
+	<div class="modal-content">
+  		<div class="modal-header">
+  			<h2>Zmiana hasła</h2>
+    		<span class="close">&times;</span>
+  		</div>
+  		<div class="modal-body">
+    		<p>Zmiana hasła</p>
+  		</div>
+  	</div>
+</div>
+
 
 <%@ include file="footer.jsp" %>
+
+<script src="/resources/js/app-modal.js"></script>
 
 </body>
 </html>

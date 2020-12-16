@@ -1891,7 +1891,7 @@ th {
 
 /* The Close Button */
 .close {
-  color: #ffffff;
+  color: black;
   float: right;
   font-size: 45px;
   font-weight: bold;
