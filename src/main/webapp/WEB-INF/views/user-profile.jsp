@@ -46,7 +46,7 @@
     </nav>
 
     <div class="slogan container container--90">
-		    	<form:form modelAttribute="loggedUser" method="post" cssClass="formTable">
+		<form:form modelAttribute="loggedUser" method="post" cssClass="formTable">
     		<table>
     			<tr>
     				<th>Imię</th>
@@ -99,7 +99,22 @@
     		<span class="close">&times;</span>
   		</div>
   		<div class="modal-body">
-    		<p>Zmiana hasła</p>
+    		<form class="formTable">
+    			<table>
+    				<tr>
+    					<td>Nowe hasło</td>
+    					<td><input data-name="newPass" type="password"></td>
+    				</tr>
+    				<tr>
+    					<td>Powtórz hasło</td>
+    					<td><input data-name="repPass" type="password"></td>
+    				</tr>
+    				<tr>
+    					<td><p class="warning"></p></td>
+    					<td><input type="submit" value="Zmień"></td>
+    				</tr>
+    			</table>
+    		</form>
   		</div>
   	</div>
 </div>

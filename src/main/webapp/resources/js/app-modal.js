@@ -8,6 +8,13 @@ document.addEventListener("DOMContentLoaded", function() {
 	let changeBtn = document.querySelector("[data-name='changeBtn']");
 	// Get the <span> element that closes the modal
 	let span = document.getElementsByClassName("close")[0];
+	//Get input with new password
+	let newPass = document.querySelectorAll(".modal-body input")[0]
+	//Get input with repeated password
+	let repPass = document.querySelectorAll(".modal-body input")[1]
+	//Get submit button from form
+	let submitBtn = document.querySelectorAll(".modal-body input")[2]
+	
 	
 	// When the user clicks on the button, open the modal to confirm action
 	deleteBtns.forEach(btn => {
@@ -27,4 +34,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	span.addEventListener("click", function(){
 		modal.style.display = "none";
 	})
+	
+	//When the user click submit button check if given passwords are the same
+	submitBtn.addEventListener("click", function(e){
+		e.preventDefault();
+		var paragraph = document.querySelector(".modal-body table p")
+		if(newPass.value === repPass.value) {
+			paragraph.innerHTML = "Hasło poprawne"
+		} else {
+			paragraph.innerHTML = "Hasło niepoprawne"
+		}
+	})
+
 })
