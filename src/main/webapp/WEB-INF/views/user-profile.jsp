@@ -110,10 +110,11 @@
     					<td><input data-name="repPass" type="password"></td>
     				</tr>
     				<tr>
-    					<td><p class="warning"></p></td>
+    					<td></td>
     					<td><input type="submit" value="Zmień"></td>
     				</tr>
     			</table>
+    			<p class="warning"></p>
     		</form>
   		</div>
   	</div>

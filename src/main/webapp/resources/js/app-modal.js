@@ -38,11 +38,17 @@ document.addEventListener("DOMContentLoaded", function() {
 	//When the user click submit button check if given passwords are the same
 	submitBtn.addEventListener("click", function(e){
 		e.preventDefault();
-		var paragraph = document.querySelector(".modal-body table p")
-		if(newPass.value === repPass.value) {
-			paragraph.innerHTML = "Hasło poprawne"
+		var paragraph = document.querySelector(".modal-body p")
+		const regexToCheckEmpty = /^\s*$/;
+		const regexToCheckPassword = /[\S]{5,10}/;
+		if(regexToCheckEmpty.test(newPass.value)) {
+			paragraph.innerHTML = "Hasło nie może być puste"
+		} else if (!regexToCheckPassword.test(newPass.value)) {
+			paragraph.innerHTML = "Hasło musi zawierać od 5 do 10 znaków";
+		} else if (newPass.value !== repPass.value){
+			paragraph.innerHTML = "Hasło źle powtórzone";
 		} else {
-			paragraph.innerHTML = "Hasło niepoprawne"
+			paragraph.innerHTML = "Hasło poprawne";
 		}
 	})
 
