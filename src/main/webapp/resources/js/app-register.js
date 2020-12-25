@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		const regexToCheck = /[A-Za-z]+/;
 		inputs.forEach(input => {
 			if(input.name === 'name') {
-				
 				if(regexToCheckEmpty.test(input.value)) {
 					input.nextElementSibling.innerText = "Nie może być puste";
 					allValuesCorrect = false;

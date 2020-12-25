@@ -74,6 +74,7 @@
     			</tr>
     			<tr>
     				<th>Hasło</th>
+    				<td><form:input path="password"/><td>
     				<td><button data-name="changeBtn" class="btn">Zmień</button></td>
     			</tr>
     			<c:if test="${not ignorableError}">
@@ -99,11 +100,11 @@
     		<span class="close">&times;</span>
   		</div>
   		<div class="modal-body">
-    		<form class="formTable">
+    		<form action="/user/change/password" class="formTable" method="post">
     			<table>
     				<tr>
     					<td>Nowe hasło</td>
-    					<td><input data-name="newPass" type="password"></td>
+    					<td><input data-name="newPass" name="password" type="password"></td>
     				</tr>
     				<tr>
     					<td>Powtórz hasło</td>
@@ -112,6 +113,10 @@
     				<tr>
     					<td></td>
     					<td><input type="submit" value="Zmień"></td>
+    				</tr>
+    				<tr>
+    					<td></td>
+    					<td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></td>
     				</tr>
     			</table>
     			<p class="warning"></p>

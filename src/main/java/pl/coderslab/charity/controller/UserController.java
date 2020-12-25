@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,6 +104,12 @@ public class UserController {
 		return "user-edit";
 	}
 	
+	@PostMapping("/user/change/password")
+	public String changeUserPassword(HttpServletRequest request, @AuthenticationPrincipal CurrentUser customUser ) {
+		customUser.getUser().setPassword(request.getParameter("password"));
+		return "redirect:/profile";
+	}
+	
 	@RequestMapping("/user/delete/{id}")
 	public String deleteUser(@PathVariable long id) {
 		Optional<User> optUserToDelete = userRepository.findById(id);
@@ -124,30 +131,6 @@ public class UserController {
 		return userToDeleteIsAdmin ? "redirect:/admin/all" : "redirect:/user/all";
 	}
 	
-//	@PostMapping("/user/enable/{id}")
-//	public String setUserEnable(@PathVariable long id) {
-//		Optional<User> optUserToSetEnable = userRepository.findById(id);
-//		if(optUserToSetEnable.isPresent()) {
-//			User userToSetEnable = optUserToSetEnable.get();
-//			userToSetEnable.setEnabled(1);
-//			userRepository.save(userToSetEnable);
-//		}
-//		return "redirect:/user/all";
-//		
-//	}
-	
-	@RequestMapping("/user/disable/{id}")
-	public String setUserDisable(@PathVariable long id) {
-		Optional<User> optUserToSetDisable = userRepository.findById(id);
-		if(optUserToSetDisable.isPresent()) {
-			User userToSetDisable = optUserToSetDisable.get();
-			userToSetDisable.setEnabled(0);
-			userRepository.save(userToSetDisable);
-		}
-		return "redirect:/user/all";
-	}
-	
-
 	@RequestMapping("/user-donations")
 	public String displayDonationsGivenByUser(@AuthenticationPrincipal CurrentUser customUser, Model model) {
 		List<Donation> donations = donationRepository.findAllByUserId(customUser.getUser().getId());
