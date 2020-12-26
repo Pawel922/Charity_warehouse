@@ -60,7 +60,8 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/edit/{id}/{ignorableError}")
-	public String processFormToEdit(Model model, @PathVariable long id, 
+	public String processFormToEdit(Model model, 
+			@PathVariable long id, 
 			@Valid @ModelAttribute User user,
 			BindingResult result) {
 		User userFromBinding = (User) result.getTarget();
@@ -105,8 +106,8 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/change/password")
-	public String changeUserPassword(HttpServletRequest request, @AuthenticationPrincipal CurrentUser customUser ) {
-		customUser.getUser().setPassword(request.getParameter("password"));
+	public String changeUserPassword(HttpServletRequest request, @ModelAttribute("loggedUser") User loggedUser) {
+		loggedUser.setPassword(request.getParameter("password"));
 		return "redirect:/profile";
 	}
 	

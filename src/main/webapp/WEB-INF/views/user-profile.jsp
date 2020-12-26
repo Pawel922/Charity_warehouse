@@ -74,7 +74,7 @@
     			</tr>
     			<tr>
     				<th>Hasło</th>
-    				<td><form:input path="password"/><td>
+    				<td><form:input path="password"/></td>
     				<td><button data-name="changeBtn" class="btn">Zmień</button></td>
     			</tr>
     			<c:if test="${not ignorableError}">
