@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	let submitBtn = document.querySelectorAll(".modal-body input")[2]
 	//Get form inside modal
 	let modalForm = document.querySelector(".modal-body form");
+	//Get input field for password
+	let inputPass = document.querySelector("form #password")
 	
 	
 	// When the user clicks on the button, open the modal to confirm action
@@ -50,7 +52,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		} else if (newPass.value !== repPass.value){
 			paragraph.innerHTML = "Hasło źle powtórzone";
 		} else {
-			modalForm.submit();
+			inputPass.value = newPass.value;
+			modal.style.display = "none";
 		}
 	})
 

@@ -31,7 +31,7 @@
         		<sec:authorize access="isAuthenticated()">
             		Witaj ${loggedUser.name}!
             		<ul class="dropdown">
-              			<li><a class="btn btn--small btn--without-border" href="/profile">Profil</a></li>
+              			<li><a class="btn btn--small btn--without-border" href="/user/edit/${loggedUser.id}/false">Profil</a></li>
               			<li>
               				<form action="<c:url value="/logout"/>" method="post">
         						<input class="btn btn--small btn--without-border" type="submit" value="Wyloguj">
@@ -75,7 +75,17 @@
     				</tr>
     			</c:if>
     			<tr>
+    			<c:if test="${loggedUser.id == user.id}">
+    				<tr>
+    					<th>Hasło</th>
+    					<td><button data-name="changeBtn" class="btn">Zmień</button></td>
+    					<td><form:input path="password"/><td>
+    				</tr>
+    			</c:if>
     			<c:choose>
+    				<c:when test="${loggedUser.id == user.id}">
+    					<td><a href="/" class="btn">Wstecz</a></td>
+    				</c:when>
     				<c:when test="${user.roles.stream().allMatch(r->r.name.equals('ROLE_ADMIN')).orElse(false)}">
     					<td><a href="/admin/all" class="btn">Wstecz</a></td>
     				</c:when>
@@ -83,7 +93,6 @@
     					<td><a href="/user/all" class="btn">Wstecz</a></td>
     				</c:when>
     			</c:choose>
-    				
     				<td><button type="submit" class="btn">Zapisz</button></td>
     			</tr>
     		</table>
@@ -91,7 +100,41 @@
     </div>
 </header>
 
+<div id="myModal" class="modal">
+ 	<!-- Modal content -->
+	<div class="modal-content">
+  		<div class="modal-header">
+  			<h2>Zmiana hasła</h2>
+    		<span class="close">&times;</span>
+  		</div>
+  		<div class="modal-body">
+    		<form action="/user/change/password" class="formTable" method="post">
+    			<table>
+    				<tr>
+    					<td>Nowe hasło</td>
+    					<td><input data-name="newPass" name="password" type="password"></td>
+    				</tr>
+    				<tr>
+    					<td>Powtórz hasło</td>
+    					<td><input data-name="repPass" type="password"></td>
+    				</tr>
+    				<tr>
+    					<td></td>
+    					<td><input type="submit" value="Zmień"></td>
+    				</tr>
+    				<tr>
+    					<td></td>
+    					<td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></td>
+    				</tr>
+    			</table>
+    			<p class="warning"></p>
+    		</form>
+  		</div>
+  	</div>
+</div>
 <%@ include file="footer.jsp" %>
+
+<script src="/resources/js/app-modal.js"></script>
 
 </body>
 </html>

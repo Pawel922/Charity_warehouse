@@ -30,7 +30,7 @@
         		<sec:authorize access="isAuthenticated()">
             		Witaj ${loggedUser.name}!
             		<ul class="dropdown">
-              			<li><a class="btn btn--small btn--without-border" href="/profile">Profil</a></li>
+              			<li><a class="btn btn--small btn--without-border" href="/user/edit/${loggedUser.id}/false">Profil</a></li>
               			<li><a class="btn btn--small btn--without-border" href="/user-donations">Moje zbiórki</a></li>
               			<li>
               				<form action="<c:url value="/logout"/>" method="post">

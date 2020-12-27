@@ -37,11 +37,6 @@ public class UserController {
 		this.userRepository = userRepository;
 	}
 	
-	@RequestMapping("/profile")
-	public String displayUserProfile() {
-		return "user-profile";
-	}
-	
 	@RequestMapping("/user/all")
 	public String displayAllUsers(Model model) {
 		model.addAttribute("users", userRepository.getAllUsers());
@@ -91,11 +86,12 @@ public class UserController {
 					}
 				}
 			}
-			
+		
 			if(!checkList.contains(false)) {
 				editedUser.setName(user.getName());
 				editedUser.setSurname(user.getSurname());
 				editedUser.setEmail(user.getEmail());
+				editedUser.setPassword(user.getPassword());
 				userRepository.save(editedUser);
 				return editedUser.getRoles().stream().allMatch(r->r.getName().equals("ROLE_ADMIN")) ? "redirect:/admin/all" : "redirect:/user/all";
 			} else {
@@ -108,7 +104,7 @@ public class UserController {
 	@PostMapping("/user/change/password")
 	public String changeUserPassword(HttpServletRequest request, @ModelAttribute("loggedUser") User loggedUser) {
 		loggedUser.setPassword(request.getParameter("password"));
-		return "redirect:/profile";
+		return "user-edit";
 	}
 	
 	@RequestMapping("/user/delete/{id}")
