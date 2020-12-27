@@ -108,7 +108,7 @@
     		<span class="close">&times;</span>
   		</div>
   		<div class="modal-body">
-    		<form action="/user/change/password" class="formTable" method="post">
+    		<form class="formTable" method="post">
     			<table>
     				<tr>
     					<td>Nowe hasło</td>

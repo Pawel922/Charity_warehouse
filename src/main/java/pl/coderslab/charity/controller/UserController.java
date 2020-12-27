@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,12 +97,6 @@ public class UserController {
 				return "user-edit";
 			}			
 		}
-		return "user-edit";
-	}
-	
-	@PostMapping("/user/change/password")
-	public String changeUserPassword(HttpServletRequest request, @ModelAttribute("loggedUser") User loggedUser) {
-		loggedUser.setPassword(request.getParameter("password"));
 		return "user-edit";
 	}
 	
