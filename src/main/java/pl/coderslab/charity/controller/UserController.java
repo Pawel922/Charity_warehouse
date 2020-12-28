@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -90,7 +91,12 @@ public class UserController {
 				editedUser.setName(user.getName());
 				editedUser.setSurname(user.getSurname());
 				editedUser.setEmail(user.getEmail());
-				editedUser.setPassword(user.getPassword());
+				
+				//save password into database only when was changed
+				if(!editedUser.getPassword().equals(user.getPassword())) {
+					editedUser.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+				}
+				
 				userRepository.save(editedUser);
 				return editedUser.getRoles().stream().allMatch(r->r.getName().equals("ROLE_ADMIN")) ? "redirect:/admin/all" : "redirect:/user/all";
 			} else {

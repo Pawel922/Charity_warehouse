@@ -79,7 +79,7 @@
     				<tr>
     					<th>Hasło</th>
     					<td><button data-name="changeBtn" class="btn">Zmień</button></td>
-    					<td><form:input path="password"/><td>
+    					<td><form:input path="password" type="hidden"/><td>
     				</tr>
     			</c:if>
     			<c:choose>
