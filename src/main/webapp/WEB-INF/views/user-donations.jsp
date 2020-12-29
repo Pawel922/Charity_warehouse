@@ -49,20 +49,18 @@
         <table>
        		<tr>
        			<th>Lp.</th>
-       			<th>Kategoria</th>
-       			<th>Fundacja</th>
-       			<th>Ilość worków</th>
+       			<th>Status</th>
+       			<th>Data odbioru</th>
+       			<th>Data przekazania</th>
+       			<th>Szczegóły</th>
        		</tr>
        		<c:forEach items="${donations}" var="donation" varStatus="theCountExt">
        			<tr>
        				<td>${theCountExt.count}</td>
-       				<td>
-       					<c:forEach items="${donation.categories}" var="category" varStatus="theCountInt">
-       						${category.name}<c:if test="${not theCountInt.last}">,&nbsp</c:if> 
-       					</c:forEach>
-       				</td>
-       				<td>${donation.institution.name}</td>
-       				<td>${donation.quantity}</td>
+       				<td></td>
+       				<td>${donation.pickUpDate}, ${donation.pickUpTime}</td>
+       				<td></td>
+       				<td><button data-href="/" class="btn">Szczegóły</button></td>
        			</tr>
        		</c:forEach>
        	</table>
