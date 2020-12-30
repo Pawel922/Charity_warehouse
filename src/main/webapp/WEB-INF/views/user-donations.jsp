@@ -14,57 +14,30 @@
 </head>
 <body>
 <header class="header--main-page">
-    <nav class="container container--70">
-        <ul class="nav--actions">
-        	<li>
-        		<sec:authorize access="!isAuthenticated()">
-        			<a href="/login" class="btn btn--small btn--without-border">Zaloguj</a>
-        		</sec:authorize>
-        	</li>
-        	<li>
-        		<sec:authorize access="!isAuthenticated()">
-        			<a href="/register" class="btn btn--small btn--without-border">Załóż konto</a>
-        		</sec:authorize>
-        	</li>
-        	<li class="logged-user">
-        		<sec:authorize access="isAuthenticated()">
-            		Witaj ${loggedUser.name}!
-            		<ul class="dropdown">
-              			<li><a class="btn btn--small btn--without-border" href="/user/edit/${loggedUser.id}/false">Profil</a></li>
-              			<li><a class="btn btn--small btn--without-border" href="/user/donations">Moje zbiórki</a></li>
-              			<li>
-              				<form action="<c:url value="/logout"/>" method="post">
-        						<input class="btn btn--small btn--without-border" type="submit" value="Wyloguj">
-        						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        					</form>
-              			</li>
-            		</ul>
-        		</sec:authorize>
-        	</li>
-        </ul>
-        <%@ include file="header.jsp" %>
-    </nav>
 
-    <div class="slogan container container--90">
-        <table>
+<%@ include file="header.jsp" %>
+
+<div class="slogan container container--90">
+	<table>
+    	<tr>
+       		<th>Lp.</th>
+       		<th>Status</th>
+       		<th>Data odbioru</th>
+       		<th>Data doręczenia</th>
+  			<th>Szczegóły</th>
+  		</tr>
+       	<c:forEach items="${donations}" var="donation" varStatus="theCountExt">
        		<tr>
-       			<th>Lp.</th>
-       			<th>Status</th>
-       			<th>Data odbioru</th>
-       			<th>Data doręczenia</th>
-       			<th>Szczegóły</th>
+       			<td>${theCountExt.count}</td>
+       			<td></td>
+       			<td>${donation.pickUpDate}, ${donation.pickUpTime}</td>
+       			<td></td>
+       			<td><a href="/donation/details/${donation.id}" class="btn">Szczegóły</a></td>
        		</tr>
-       		<c:forEach items="${donations}" var="donation" varStatus="theCountExt">
-       			<tr>
-       				<td>${theCountExt.count}</td>
-       				<td></td>
-       				<td>${donation.pickUpDate}, ${donation.pickUpTime}</td>
-       				<td></td>
-       				<td><a href="/donation/details/${donation.id}" class="btn">Szczegóły</a></td>
-       			</tr>
-       		</c:forEach>
-       	</table>
-    </div>
+       	</c:forEach>
+	</table>
+</div>
+    
 </header>
 
 

@@ -12,33 +12,15 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
-    <header class="header--form-page">
-      <nav class="container container--70">
-        <ul class="nav--actions">
-          <li class="logged-user">
-            Witaj ${loggedUser.name}!
-            <ul class="dropdown">
-              <li><a class="btn btn--small btn--without-border" href="/user/edit/${loggedUser.id}/false">Profil</a></li>
-              <li><li><a class="btn btn--small btn--without-border" href="/user/donations">Moje zbiórki</a></li>
-              <li>
-              		<form action="<c:url value="/logout"/>" method="post">
-        				<input class="btn btn--small btn--without-border" type="submit" value="Wyloguj">
-        				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        			</form>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <%@ include file="header.jsp" %>
-      </nav>
+<header class="header--form-page">
 
-      <div class="slogan container container--90">
-          <h2>
-            Z pewnych powodów możliwość oddania przez Ciebie darowizny została zablokowana. 
-            Skontaktuj sie z administratorem. 
-          </h2>
-      </div>
-    </header>
+<%@ include file="header.jsp" %>
+
+<div class="slogan container container--90">
+	<h2>Z pewnych powodów możliwość oddania przez Ciebie darowizny została zablokowana<br/>Skontaktuj sie z administratorem.</h2>
+</div>
+
+</header>
 
 <%@ include file="footer.jsp" %>
 

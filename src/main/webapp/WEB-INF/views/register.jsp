@@ -14,18 +14,14 @@
 </head>
 <body>
 <header>
-    <nav class="container container--70">
-      <ul class="nav--actions">
-         <li><a href="/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
-         <li><a href="/register" class="btn btn--small btn--highlighted">Załóż konto</a></li>
-      </ul>
-      <%@ include file="header.jsp" %>
-    </nav>
+
+<%@ include file="header.jsp" %>
+
 </header>
 
 <section class="login-page">
-      <h2>Załóż konto</h2>
-      <form:form name="registration" method="post" modelAttribute="userToRegister">
+	<h2>Załóż konto</h2>
+    <form:form name="registration" method="post" modelAttribute="userToRegister">
       	<div class="form-group">
           <form:input path="name" placeholder="Imię"/>
           <p class="warning"></p>
@@ -51,7 +47,7 @@
           <a href="/login" class="btn btn--without-border">Zaloguj się</a>
           <button class="btn" type="submit">Załóż konto</button>
         </div>
-      </form:form>
+	</form:form>
 </section>
 
 <%@ include file="footer.jsp" %>

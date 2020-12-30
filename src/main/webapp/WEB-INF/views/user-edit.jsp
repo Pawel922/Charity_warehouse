@@ -15,67 +15,39 @@
 </head>
 <body>
 <header class="header--main-page">
-    <nav class="container container--70">
-        <ul class="nav--actions">
-        	<li>
-        		<sec:authorize access="!isAuthenticated()">
-        			<a href="/login" class="btn btn--small btn--without-border">Zaloguj</a>
-        		</sec:authorize>
-        	</li>
-        	<li>
-        		<sec:authorize access="!isAuthenticated()">
-        			<a href="/register" class="btn btn--small btn--without-border">Załóż konto</a>
-        		</sec:authorize>
-        	</li>
-        	<li class="logged-user">
-        		<sec:authorize access="isAuthenticated()">
-            		Witaj ${loggedUser.name}!
-            		<ul class="dropdown">
-              			<li><a class="btn btn--small btn--without-border" href="/user/edit/${loggedUser.id}/false">Profil</a></li>
-              			<li><a class="btn btn--small btn--without-border" href="/user/donations">Moje zbiórki</a></li>
-              			<li>
-              				<form action="<c:url value="/logout"/>" method="post">
-        						<input class="btn btn--small btn--without-border" type="submit" value="Wyloguj">
-        						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        					</form>
-              			</li>
-            		</ul>
-        		</sec:authorize>
-        	</li>
-        </ul>
-        <%@ include file="header.jsp" %>
-    </nav>
 
-    <div class="slogan container container--90">
-    	<form:form modelAttribute="user" method="post" cssClass="formTable">
-    		<table>
-    			<tr>
-    				<th>Imię</th>
-    				<td><form:input path="name"/></td>
-    			</tr>
+<%@ include file="header.jsp" %>
+
+<div class="slogan container container--90">
+    <form:form modelAttribute="user" method="post" cssClass="formTable">
+    	<table>
+    		<tr>
+    			<th>Imię</th>
+   				<td><form:input path="name"/></td>
+   			</tr>
+   			<tr>
+   				<td></td>
+    			<td><form:errors path="name" cssClass="warning"/></td>
+    		</tr>
+    		<tr>
+   				<th>Nazwisko</th>
+   				<td><form:input path="surname"/><td>
+    		</tr>
+    		<tr>
+    			<td></td>
+    			<td><form:errors path="surname" cssClass="warning"/></td>
+    		</tr>
+    		<tr>
+    			<th>Email</th>
+    			<td><form:input path="email"/><td>
+    		</tr>
+    		<c:if test="${not ignorableError}">
     			<tr>
     				<td></td>
-    				<td><form:errors path="name" cssClass="warning"/></td>
+    				<td><form:errors path="email" cssClass="warning"/></td>
     			</tr>
-    			<tr>
-    				<th>Nazwisko</th>
-    				<td><form:input path="surname"/><td>
-    			</tr>
-    			<tr>
-    				<td></td>
-    				<td><form:errors path="surname" cssClass="warning"/></td>
-    			</tr>
-    			<tr>
-    				<th>Email</th>
-    				<td><form:input path="email"/><td>
-    			</tr>
-    			<c:if test="${not ignorableError}">
-    				<tr>
-    					<td></td>
-    					<td><form:errors path="email" cssClass="warning"/></td>
-    				</tr>
-    			</c:if>
-    			<tr>
+    		</c:if>
+    		<tr>
     			<c:if test="${loggedUser.id == user.id}">
     				<tr>
     					<th>Hasło</th>
@@ -94,11 +66,12 @@
     					<td><a href="/user/all" class="btn">Wstecz</a></td>
     				</c:when>
     			</c:choose>
-    				<td><button type="submit" class="btn">Zapisz</button></td>
-    			</tr>
-    		</table>
-    	</form:form>
-    </div>
+    			<td><button type="submit" class="btn">Zapisz</button></td>
+    		</tr>
+		</table>
+	</form:form>
+</div>
+    
 </header>
 
 <div id="myModal" class="modal">

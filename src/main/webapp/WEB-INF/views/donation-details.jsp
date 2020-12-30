@@ -14,68 +14,40 @@
 </head>
 <body>
 <header class="header--main-page">
-    <nav class="container container--70">
-        <ul class="nav--actions">
-        	<li>
-        		<sec:authorize access="!isAuthenticated()">
-        			<a href="/login" class="btn btn--small btn--without-border">Zaloguj</a>
-        		</sec:authorize>
-        	</li>
-        	<li>
-        		<sec:authorize access="!isAuthenticated()">
-        			<a href="/register" class="btn btn--small btn--without-border">Załóż konto</a>
-        		</sec:authorize>
-        	</li>
-        	<li class="logged-user">
-        		<sec:authorize access="isAuthenticated()">
-            		Witaj ${loggedUser.name}!
-            		<ul class="dropdown">
-              			<li><a class="btn btn--small btn--without-border" href="/user/edit/${loggedUser.id}/false">Profil</a></li>
-              			<li><a class="btn btn--small btn--without-border" href="/user/donations">Moje zbiórki</a></li>
-              			<li>
-              				<form action="<c:url value="/logout"/>" method="post">
-        						<input class="btn btn--small btn--without-border" type="submit" value="Wyloguj">
-        						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        					</form>
-              			</li>
-            		</ul>
-        		</sec:authorize>
-        	</li>
-        </ul>
-        <%@ include file="header.jsp" %>
-    </nav>
 
-    <div class="slogan container container--90">
-        <table>
-       		<tr>
-       			<th>Fundacja:</th>
-       			<td>${donation.institution.name}</td>
-       		</tr>
-       		<tr>
-       			<th>Dary:</th>
-       			<td>
-       				<c:forEach items="${donation.categories}" var="category" varStatus="counter">
-       					${category.name}<c:if test="${not counter.last}">, <br></c:if>
-       				</c:forEach>
-       			</td>
-       		</tr>
-       		<tr>
-       			<th>Data odbioru:</th>
-       			<td>${donation.pickUpDate}, ${donation.pickUpTime}</td>
-       		</tr>
-       		<tr>
-       			<th>Data doręczenia:</th>
-       			<td></td>
-       		</tr>
-       		<tr>
-       			<td><a href="/user/donations" class="btn">Wstecz</a></td>
-       			<td></td>
-       		</tr>
-       	</table>
-    </div>
+<%@ include file="header.jsp" %>
+
+<div class="slogan container container--90">
+	<table>
+ 		<tr>
+  			<th>Fundacja:</th>
+  			<td>${donation.institution.name}</td>
+   		</tr>
+       	<tr>
+       		<th>Dary:</th>
+       		<td>
+       			<c:forEach items="${donation.categories}" var="category" varStatus="counter">
+       				${category.name}<c:if test="${not counter.last}">, <br></c:if>
+       			</c:forEach>
+       		</td>
+       	</tr>
+       	<tr>
+       		<th>Data odbioru:</th>
+       		<td>${donation.pickUpDate}, ${donation.pickUpTime}</td>
+       	</tr>
+       	<tr>
+       		<th>Data doręczenia:</th>
+       		<td></td>
+       	</tr>
+       	<tr>
+       		<td><a href="/user/donations" class="btn">Wstecz</a></td>
+       		<td></td>
+    	</tr>
+	</table>
+</div>
 </header>
 
-
 <%@ include file="footer.jsp" %>
+
 </body>
 </html>

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
-    <header class="header--form-page">
+<header class="header--form-page">
       <nav class="container container--70">
         <ul class="nav--actions">
           <li class="logged-user">
@@ -32,13 +32,12 @@
         <%@ include file="header.jsp" %>
       </nav>
 
-      <div class="slogan container container--90">
-          <h2>
-            Dziękujemy za przesłanie formularza. Na maila prześlemy wszelkie
-            informacje o odbiorze.
-          </h2>
-      </div>
-    </header>
+<div class="slogan container container--90">
+	<h2>Dziękujemy za przesłanie formularza. Na maila prześlemy wszelkie<br/>informacje o odbiorze.
+	</h2>
+</div>
+
+</header>
 
 <%@ include file="footer.jsp" %>
 

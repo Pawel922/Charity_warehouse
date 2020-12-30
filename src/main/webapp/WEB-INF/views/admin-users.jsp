@@ -14,55 +14,27 @@
 </head>
 <body>
 <header class="header--main-page">
-    <nav class="container container--70">
-        <ul class="nav--actions">
-        	<li>
-        		<sec:authorize access="!isAuthenticated()">
-        			<a href="/login" class="btn btn--small btn--without-border">Zaloguj</a>
-        		</sec:authorize>
-        	</li>
-        	<li>
-        		<sec:authorize access="!isAuthenticated()">
-        			<a href="/register" class="btn btn--small btn--without-border">Załóż konto</a>
-        		</sec:authorize>
-        	</li>
-        	<li class="logged-user">
-        		<sec:authorize access="isAuthenticated()">
-            		Witaj ${loggedUser.name}!
-            		<ul class="dropdown">
-              			<li><a class="btn btn--small btn--without-border" href="/user/edit/${loggedUser.id}/false">Profil</a></li>
-              			<li><a class="btn btn--small btn--without-border" href="/user/donations">Moje zbiórki</a></li>
-              			<li>
-              				<form action="<c:url value="/logout"/>" method="post">
-        						<input class="btn btn--small btn--without-border" type="submit" value="Wyloguj">
-        						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        					</form>
-              			</li>
-            		</ul>
-        		</sec:authorize>
-        	</li>
-        </ul>
-        <%@ include file="header.jsp" %>
-    </nav>
 
-    <div class="slogan container container--90">
-		<table>
+<%@ include file="header.jsp" %>
+
+<div class="slogan container container--90">
+	<table>
+		<tr>
+       		<th>Lp.</th>
+       		<th>Imię</th>
+   			<th>Nazwisko</th>
+       		<th>Email</th>
+       		<th></th>
+       		<th></th>
+			<th></th>
+       	</tr>
+       	<c:forEach items="${users}" var="user" varStatus="theCount">
        		<tr>
-       			<th>Lp.</th>
-       			<th>Imię</th>
-       			<th>Nazwisko</th>
-       			<th>Email</th>
-       			<th></th>
-       			<th></th>
-       			<th></th>
-       		</tr>
-       		<c:forEach items="${users}" var="user" varStatus="theCount">
-       			<tr>
-       				<td>${theCount.count}</td>
-       				<td>${user.name}</td>
-       				<td>${user.surname}</td>
-       				<td>${user.email}</td>
-       				<td><a href="/user/edit/${user.id}/false" class="btn">Edytuj</a></td>
+       			<td>${theCount.count}</td>
+       			<td>${user.name}</td>
+       			<td>${user.surname}</td>
+       			<td>${user.email}</td>
+       			<td><a href="/user/edit/${user.id}/false" class="btn">Edytuj</a></td>
        				<c:choose>
        					<c:when test="${user.enabled == 1}">
        						<td><button data-status="disable" data-href="/user/disable/${user.id}" style="background-color: green" class="btn">Blokuj</button></td>
@@ -71,20 +43,21 @@
        						<td ><button data-status="enable" data-href="/user/enable/${user.id}" style="background-color: red" class="btn">Odblokuj</button></td>
        					</c:when>
        				</c:choose>
-       				<td><button data-name="removeBtn" data-href="/user/delete/${user.id}" class="btn">Usuń</button></td>
-       			</tr>
-       		</c:forEach>
-       		<tr>
-       			<td></td>
-       			<td></td>
-       			<td></td>
-       			<td></td>
-       			<td></td>
-       			<td></td>
-       			<td><a href="/admin" class="btn">Wstecz</a></td>
+       			<td><button data-name="removeBtn" data-href="/user/delete/${user.id}" class="btn">Usuń</button></td>
        		</tr>
-       	</table>
-    </div>
+       	</c:forEach>
+       	<tr>
+       		<td></td>
+       		<td></td>
+       		<td></td>
+       		<td></td>
+       		<td></td>
+       		<td></td>
+       		<td><a href="/admin" class="btn">Wstecz</a></td>
+       	</tr>
+	</table>
+</div>
+
 </header>
 
 <div id="myModal" class="modal">

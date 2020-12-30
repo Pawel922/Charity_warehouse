@@ -14,66 +14,40 @@
 </head>
 <body>
 <header class="header--main-page">
-    <nav class="container container--70">
-        <ul class="nav--actions">
-        	<li>
-        		<sec:authorize access="!isAuthenticated()">
-        			<a href="/login" class="btn btn--small btn--without-border">Zaloguj</a>
-        		</sec:authorize>
-        	</li>
-        	<li>
-        		<sec:authorize access="!isAuthenticated()">
-        			<a href="/register" class="btn btn--small btn--without-border">Załóż konto</a>
-        		</sec:authorize>
-        	</li>
-        	<li class="logged-user">
-        		<sec:authorize access="isAuthenticated()">
-            		Witaj ${loggedUser.name}!
-            		<ul class="dropdown">
-              			<li><a class="btn btn--small btn--without-border" href="/user/edit/${loggedUser.id}/false">Profil</a></li>
-              			<li><a class="btn btn--small btn--without-border" href="/user/donations">Moje zbiórki</a></li>
-              			<li>
-              				<form action="<c:url value="/logout"/>" method="post">
-        						<input class="btn btn--small btn--without-border" type="submit" value="Wyloguj">
-        						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        					</form>
-              			</li>
-            		</ul>
-        		</sec:authorize>
-        	</li>
-        </ul>
-        <%@ include file="header.jsp" %>
-    </nav>
 
-    <div class="slogan container container--90">
-		<table>
+<%@ include file="header.jsp" %>
+
+<div class="slogan container container--90">
+	<table>
+       	<tr>
+       		<th>Lp.</th>
+       		<th>Name</th>
+       		<th>Opis</th>
+       		<th></th>
+   			<th></th>
+       	</tr>
+       	<c:forEach items="${institutions}" var="institution" varStatus="theCount">
        		<tr>
-       			<th>Lp.</th>
-       			<th>Name</th>
-       			<th>Opis</th>
-       			<th></th>
-       			<th></th>
+       			<td>${theCount.count}</td>
+       			<td>${institution.name}</td>
+       			<td>${institution.description}</td>
+       			<td><a href="/institution/edit/${institution.id}" class="btn">Edytuj</a></td>
+       			<td><a href="/institution/delete/${institution.id}" class="btn">Usuń</a></td>
        		</tr>
-       		<c:forEach items="${institutions}" var="institution" varStatus="theCount">
-       			<tr>
-       				<td>${theCount.count}</td>
-       				<td>${institution.name}</td>
-       				<td>${institution.description}</td>
-       				<td><a href="/institution/edit/${institution.id}" class="btn">Edytuj</a></td>
-       				<td><a href="/institution/delete/${institution.id}" class="btn">Usuń</a></td>
-       			</tr>
-       		</c:forEach>
-       		<tr>
-       			<td></td>
-       			<td></td>
-       			<td></td>
-       			<td><a href="/admin" class="btn">Wstecz</a></td>
-       			<td><a href="/institution/add" class="btn">Dodaj</a></td>
-       		</tr>
-       	</table>
-    </div>
+       	</c:forEach>
+       	<tr>
+       		<td></td>
+       		<td></td>
+       		<td></td>
+       		<td><a href="/admin" class="btn">Wstecz</a></td>
+       		<td><a href="/institution/add" class="btn">Dodaj</a></td>
+       	</tr>
+	</table>
+</div>
+
 </header>
 
 <%@ include file="footer.jsp" %>
+
 </body>
 </html>
