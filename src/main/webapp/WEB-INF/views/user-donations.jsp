@@ -31,7 +31,7 @@
             		Witaj ${loggedUser.name}!
             		<ul class="dropdown">
               			<li><a class="btn btn--small btn--without-border" href="/user/edit/${loggedUser.id}/false">Profil</a></li>
-              			<li><a class="btn btn--small btn--without-border" href="/user-donations">Moje zbiórki</a></li>
+              			<li><a class="btn btn--small btn--without-border" href="/user/donations">Moje zbiórki</a></li>
               			<li>
               				<form action="<c:url value="/logout"/>" method="post">
         						<input class="btn btn--small btn--without-border" type="submit" value="Wyloguj">
@@ -51,7 +51,7 @@
        			<th>Lp.</th>
        			<th>Status</th>
        			<th>Data odbioru</th>
-       			<th>Data przekazania</th>
+       			<th>Data doręczenia</th>
        			<th>Szczegóły</th>
        		</tr>
        		<c:forEach items="${donations}" var="donation" varStatus="theCountExt">
@@ -60,7 +60,7 @@
        				<td></td>
        				<td>${donation.pickUpDate}, ${donation.pickUpTime}</td>
        				<td></td>
-       				<td><button data-href="/" class="btn">Szczegóły</button></td>
+       				<td><a href="/donation/details/${donation.id}" class="btn">Szczegóły</a></td>
        			</tr>
        		</c:forEach>
        	</table>

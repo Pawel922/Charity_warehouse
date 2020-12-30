@@ -127,7 +127,7 @@ public class UserController {
 		return userToDeleteIsAdmin ? "redirect:/admin/all" : "redirect:/user/all";
 	}
 	
-	@RequestMapping("/user-donations")
+	@RequestMapping("/user/donations")
 	public String displayDonationsGivenByUser(@AuthenticationPrincipal CurrentUser customUser, Model model) {
 		List<Donation> donations = donationRepository.findAllByUserId(customUser.getUser().getId());
 		model.addAttribute("donations", donations);

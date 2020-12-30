@@ -5,6 +5,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -79,6 +81,17 @@ public class DonationController {
         donationRepository.save(donation);
         return "form-confirmation";
     }
+    
+    @RequestMapping("/donation/details/{id}")
+    public String viewDetails(@PathVariable long id, Model model) {
+    	Optional<Donation> optDonation = donationRepository.findById(id);
+    	if(optDonation.isPresent()) {
+    		model.addAttribute("donation", optDonation.get());
+    	}
+    	return "donation-details";
+    }
+   
+   
     
     @ModelAttribute("categories")
     public List<Category> getAllCategories() {

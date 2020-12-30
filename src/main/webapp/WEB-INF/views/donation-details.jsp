@@ -46,33 +46,35 @@
     </nav>
 
     <div class="slogan container container--90">
-		<table>
+        <table>
        		<tr>
-       			<th>Lp.</th>
-       			<th>Name</th>
-       			<th>Opis</th>
-       			<th></th>
-       			<th></th>
+       			<th>Fundacja:</th>
+       			<td>${donation.institution.name}</td>
        		</tr>
-       		<c:forEach items="${institutions}" var="institution" varStatus="theCount">
-       			<tr>
-       				<td>${theCount.count}</td>
-       				<td>${institution.name}</td>
-       				<td>${institution.description}</td>
-       				<td><a href="/institution/edit/${institution.id}" class="btn">Edytuj</a></td>
-       				<td><a href="/institution/delete/${institution.id}" class="btn">Usuń</a></td>
-       			</tr>
-       		</c:forEach>
        		<tr>
+       			<th>Dary:</th>
+       			<td>
+       				<c:forEach items="${donation.categories}" var="category" varStatus="counter">
+       					${category.name}<c:if test="${not counter.last}">, <br></c:if>
+       				</c:forEach>
+       			</td>
+       		</tr>
+       		<tr>
+       			<th>Data odbioru:</th>
+       			<td>${donation.pickUpDate}, ${donation.pickUpTime}</td>
+       		</tr>
+       		<tr>
+       			<th>Data doręczenia:</th>
        			<td></td>
+       		</tr>
+       		<tr>
+       			<td><a href="/user/donations" class="btn">Wstecz</a></td>
        			<td></td>
-       			<td></td>
-       			<td><a href="/admin" class="btn">Wstecz</a></td>
-       			<td><a href="/institution/add" class="btn">Dodaj</a></td>
        		</tr>
        	</table>
     </div>
 </header>
+
 
 <%@ include file="footer.jsp" %>
 </body>
