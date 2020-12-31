@@ -43,6 +43,10 @@ public class Donation {
     private LocalTime pickUpTime;
 
     private String pickUpComment;
+    
+    private LocalDate receiveDate;
+    
+    private int status = 0;
 
     public long getId() {
         return id;
@@ -139,10 +143,24 @@ public class Donation {
     public void setPickUpComment(String pickUpComment) {
         this.pickUpComment = pickUpComment;
     }
-    
-    
 
-    @Override
+    public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public LocalDate getReceiveDate() {
+		return receiveDate;
+	}
+
+	public void setReceiveDate(LocalDate receiveDate) {
+		this.receiveDate = receiveDate;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

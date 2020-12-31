@@ -13,24 +13,8 @@
 </head>
 <body>
 <header class="header--form-page">
-      <nav class="container container--70">
-        <ul class="nav--actions">
-          <li class="logged-user">
-            Witaj ${loggedUser.name}!
-            <ul class="dropdown">
-              <li><a class="btn btn--small btn--without-border" href="/user/edit/${loggedUser.id}/false">Profil</a></li>
-              <li><a class="btn btn--small btn--without-border" href="/user/donations">Moje zbiórki</a></li>
-              <li>
-              		<form action="<c:url value="/logout"/>" method="post">
-        				<input class="btn btn--small btn--without-border" type="submit" value="Wyloguj">
-        				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        			</form>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <%@ include file="header.jsp" %>
-      </nav>
+
+<%@ include file="header.jsp" %>
 
 <div class="slogan container container--90">
 	<h2>Dziękujemy za przesłanie formularza. Na maila prześlemy wszelkie<br/>informacje o odbiorze.
