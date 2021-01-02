@@ -93,19 +93,18 @@
     					<td><input data-name="repPass" type="password"></td>
     				</tr>
     				<tr>
-    					<td></td>
+    					<td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></td>
     					<td><input type="submit" value="Zmień"></td>
     				</tr>
-    				<tr>
-    					<td></td>
-    					<td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></td>
-    				</tr>
     			</table>
-    			<p class="warning"></p>
     		</form>
+    		<div>
+    			<p class="warning"></p>
+    		</div>
   		</div>
   	</div>
 </div>
+
 <%@ include file="footer.jsp" %>
 
 <script src="/resources/js/app-modal.js"></script>

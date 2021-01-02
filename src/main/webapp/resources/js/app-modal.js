@@ -13,9 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	//Get input with repeated password
 	let repPass = document.querySelectorAll(".modal-body input")[1]
 	//Get submit button from form
-	let submitBtn = document.querySelectorAll(".modal-body input")[2]
-	//Get form inside modal
-	let modalForm = document.querySelector(".modal-body form");
+	let submitBtn = document.querySelectorAll(".modal-body input")[3]
 	//Get input field for password
 	let inputPass = document.querySelector("form #password")
 	

@@ -19,36 +19,73 @@
 <%@ include file="header.jsp" %>
 
 <div class="slogan container container--90">
-	<form:form modelAttribute="donation" method="post">
-		<table>
- 			<tr>
-  				<th>Fundacja:</th>
-  				<td>${donation.institution.name}</td>
-   			</tr>
-    	   	<tr>
-     	  		<th>Dary:</th>
-     	  		<td>
-     	  			<c:forEach items="${donation.categories}" var="category" varStatus="counter">
-     	  				${category.name}<c:if test="${not counter.last}">, <br></c:if>
-     	  			</c:forEach>
-     	  		</td>
-     	  	</tr>
-    	   	<tr>
-      	 		<th>Data odbioru:</th>
-     	 		<td>${donation.pickUpDate}, ${donation.pickUpTime}</td>
-      	 	</tr>
-      	 	<tr>
-       			<th>Data doręczenia:</th>
-       			<td><form:input path="receiveDate" type="date"/></td>
-       		</tr>
-       		<tr>
-       			<td><a href="/user/donations" class="btn">Wstecz</a></td>
-       			<td></td>
-    		</tr>
-		</table>
-	</form:form>
+	<table>
+ 		<tr>
+  			<th>Fundacja:</th>
+  			<td>${donation.institution.name}</td>
+   		</tr>
+    	<tr>
+     	  	<th>Dary:</th>
+     	  	<td>
+     	  		<c:forEach items="${donation.categories}" var="category" varStatus="counter">
+     	  			${category.name}<c:if test="${not counter.last}">, <br></c:if>
+     	  		</c:forEach>
+     	  	</td>
+     	</tr>
+    	<tr>
+      	 	<th>Data odbioru:</th>
+     	 	<td>${donation.pickUpDate}, ${donation.pickUpTime}</td>
+      	 </tr>
+      	 <tr>
+       		<th>Data doręczenia:</th>
+       		<c:choose>
+       			<c:when test="${not empty donation.receiveDate}">
+       				<td>
+       					${donation.receiveDate}<span>&nbsp</span>
+       					<button data-name='typeBtn' class="btn">Zmień</button>
+       				</td>
+       			</c:when>
+       			<c:otherwise>
+       				<td><button data-name='typeBtn' class="btn">Wprowadź</button></td>
+       			</c:otherwise>
+       		</c:choose>
+       	</tr>
+       	<tr>
+       		<td><a href="/user/donations" class="btn">Wstecz</a></td>
+       		<td></td>
+    	</tr>
+	</table>
 </div>
 </header>
+
+<div id="myModal" class="modal">
+ 	<!-- Modal content -->
+	<div class="modal-content">
+  		<div class="modal-header">
+  			<h2>Wprowadź datę doręczenia</h2>
+    		<span class="close">&times;</span>
+  		</div>
+  		<div class="modal-body">
+    		<form class="formTable" method="post">
+    			<table>
+    				<tr>
+    					<td>Data doręczenia</td>
+    					<td><input data-name="recDate" name="recDate" type="date"></td>
+    				</tr>
+    				<tr>
+    					<td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></td>
+    					<td><input type="submit" value="Wprowadź"></td>
+    				</tr>
+    			</table>
+    		</form>
+    		<div>
+    			<p class="warning"></p>
+    		</div>
+  		</div>
+  	</div>
+</div>
+
+<script src="/resources/js/app-donation-modal.js"></script>
 
 <%@ include file="footer.jsp" %>
 
