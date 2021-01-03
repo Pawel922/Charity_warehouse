@@ -91,6 +91,18 @@ public class DonationController {
     	return "donation-details";
     }
     
+    @PostMapping("/donation/details/{id}")
+    public String processDetailsForm(@PathVariable long id, @RequestParam String receiveDate) {
+    	Optional<Donation> optDonation = donationRepository.findById(id);
+    	if(optDonation.isPresent()) {
+    		Donation donationToEdit = optDonation.get();
+    		donationToEdit.setReceiveDate(dateConverter(receiveDate));
+    		donationToEdit.setStatus(1);
+    		donationRepository.save(donationToEdit);
+    	}
+    	return "redirect:/donation/details/" + id;
+    }
+    
    
    
     

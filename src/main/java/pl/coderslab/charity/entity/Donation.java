@@ -46,6 +46,8 @@ public class Donation {
     
     private LocalDate receiveDate;
     
+    //status 0 means that donation was not received
+    //status 1 means that donation was received
     private int status = 0;
 
     public long getId() {

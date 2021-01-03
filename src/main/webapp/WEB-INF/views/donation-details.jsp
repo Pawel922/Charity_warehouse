@@ -66,11 +66,11 @@
     		<span class="close">&times;</span>
   		</div>
   		<div class="modal-body">
-    		<form class="formTable" method="post">
+    		<form action="/donation/details/${donation.id}" method="post" class="formTable">
     			<table>
     				<tr>
     					<td>Data doręczenia</td>
-    					<td><input data-name="recDate" name="recDate" type="date"></td>
+    					<td><input name="receiveDate" type="date"></td>
     				</tr>
     				<tr>
     					<td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></td>

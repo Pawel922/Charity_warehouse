@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	let span = document.getElementsByClassName("close")[0];
 	//Get value of pick up date
 	let pickUpDateStr = document.querySelectorAll("table td")[2].innerText.split(", ")[0];
-	
+	//Get form inside modal
+	let formModal = document.querySelector(".modal form");
 	//Get submit button from form
 	let submitBtn = document.querySelectorAll(".modal-body input")[2]
 	
@@ -35,11 +36,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		var receiveDate = Date.parse(receiveDateStr);
 		
 		if(receiveDateStr === "") {
-			paragraph.innerHTML = "Wprowadz date";
+			paragraph.innerHTML = "pole data jest puste";
 		} else if (receiveDate < pickUpDate) {
-			paragraph.innerHTML = "Zła data";
+			paragraph.innerHTML = "niewłaściwa data";
 		} else {
-			paragraph.innerHTML = "Data poprawna";
+			formModal.submit();
+			modal.style.display = "none";
 		}
 	})
 
