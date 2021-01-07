@@ -18,30 +18,43 @@
 <%@ include file="header.jsp" %>
 
 <div class="slogan container container--90">
-	<table>
-    	<tr>
-       		<th>Lp.</th>
-       		<th>Status</th>
-       		<th>Data odbioru</th>
-       		<th>Data doręczenia</th>
-  			<th>Szczegóły</th>
-  		</tr>
-       	<c:forEach items="${donations}" var="donation" varStatus="theCountExt">
-       		<tr>
-       			<td>${theCountExt.count}</td>
-       			<c:choose>
-       				<c:when test="${donation.status == 0}"><td style="color:red; font-style:italic">nieodebrane</td></c:when>
-       				<c:otherwise><td style="color:green; font-style:italic">odebrane</td></c:otherwise>
-       			</c:choose>
-       			<td>${donation.pickUpDate}, ${donation.pickUpTime}</td>
-       			<c:choose>
-       				<c:when test="${donation.receiveDate == null}"><td style="text-align:center">----.--.--</td></c:when>
-       				<c:otherwise><td>${donation.receiveDate}</td></c:otherwise>
-       			</c:choose>
-       			<td><a href="/donation/details/${donation.id}" class="btn">Szczegóły</a></td>
-       		</tr>
-       	</c:forEach>
-	</table>
+	<form action="/" method="get">	
+		<table>
+			<tr>
+				<td style="border:none">Sortuj </td>
+				<td style="border:none">
+					<select name="sortBy">
+						<option value="status">wg statusu: odebrane</option>
+						<option value="status">wg statusu: nieodebrane</option>
+						<option value="pickUpDate">wg daty odbioru</option>
+						<option value="receiveDate">wg daty przekazania</option>
+					</select>
+				</td>
+			</tr>
+    		<tr>
+       			<th>Lp.</th>
+       			<th>Status</th>
+       			<th>Data odbioru</th>
+       			<th>Data doręczenia</th>
+  				<th>Szczegóły</th>
+  			</tr>
+       		<c:forEach items="${donations}" var="donation" varStatus="theCountExt">
+       			<tr>
+       				<td>${theCountExt.count}</td>
+       				<c:choose>
+       					<c:when test="${donation.status == 0}"><td style="color:red; font-style:italic">nieodebrane</td></c:when>
+       					<c:otherwise><td style="color:green; font-style:italic">odebrane</td></c:otherwise>
+       				</c:choose>
+       				<td>${donation.pickUpDate}, ${donation.pickUpTime}</td>
+       				<c:choose>
+       					<c:when test="${donation.receiveDate == null}"><td style="text-align:center">----.--.--</td></c:when>
+       					<c:otherwise><td>${donation.receiveDate}</td></c:otherwise>
+       				</c:choose>
+       				<td><a href="/donation/details/${donation.id}" class="btn">Szczegóły</a></td>
+       			</tr>
+       		</c:forEach>
+		</table>
+	</form>
 </div>
     
 </header>

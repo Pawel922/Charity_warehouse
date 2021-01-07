@@ -129,7 +129,7 @@ public class UserController {
 	
 	@RequestMapping("/user/donations")
 	public String displayDonationsGivenByUser(@AuthenticationPrincipal CurrentUser customUser, Model model) {
-		List<Donation> donations = donationRepository.findAllByUserId(customUser.getUser().getId());
+		List<Donation> donations = donationRepository.findAllByUserIdsortByStatus(customUser.getUser().getId(),1);
 		model.addAttribute("donations", donations);
 		return "user-donations";
 	}
