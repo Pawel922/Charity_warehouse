@@ -48,7 +48,7 @@ public class Donation {
     
     //status 0 means that donation was not received
     //status 1 means that donation was received
-    private int status = 0;
+    private long status = 0;
 
     public long getId() {
         return id;
@@ -146,7 +146,7 @@ public class Donation {
         this.pickUpComment = pickUpComment;
     }
 
-    public int getStatus() {
+    public long getStatus() {
 		return status;
 	}
 

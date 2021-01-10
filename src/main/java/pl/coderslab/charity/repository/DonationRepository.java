@@ -17,5 +17,11 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
 	List<Donation> findAllByInstitutionId(long id);
 	
 	@Query("SELECT d FROM Donation d WHERE d.user.id = ?1 AND d.status = ?2")
-	List<Donation> findAllByUserIdsortByStatus(long id, long stat);
+	List<Donation> findAllByUserIdSortByStatus(long id, long status);
+	
+	@Query("SELECT d FROM Donation d WHERE d.user.id = ?1 ORDER BY d.pickUpDate")
+	List<Donation> findAllByUserIdSortByPickUpDate(long id);
+	
+	@Query("SELECT d FROM Donation d WHERE d.user.id = ?1 ORDER BY d.receiveDate")
+	List<Donation> findAllByUserIdSortByReceiveDate(long id);
 }

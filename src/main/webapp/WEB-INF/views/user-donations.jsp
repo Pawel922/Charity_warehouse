@@ -18,17 +18,21 @@
 <%@ include file="header.jsp" %>
 
 <div class="slogan container container--90">
-	<form action="/" method="get">	
+	<form action="/user/donations/" method="get">	
 		<table>
 			<tr>
-				<td style="border:none">Sortuj </td>
+				<td style="border:none">Wyświetl</td>
 				<td style="border:none">
 					<select name="sortBy">
-						<option value="status">wg statusu: odebrane</option>
-						<option value="status">wg statusu: nieodebrane</option>
+						<option value="all">wszystkie</option>
+						<option value="received">wg statusu: odebrane</option>
+						<option value="not_received">wg statusu: nieodebrane</option>
 						<option value="pickUpDate">wg daty odbioru</option>
 						<option value="receiveDate">wg daty przekazania</option>
 					</select>
+				</td>
+				<td style="border:none">
+					<button>Wyświetl</button>
 				</td>
 			</tr>
     		<tr>

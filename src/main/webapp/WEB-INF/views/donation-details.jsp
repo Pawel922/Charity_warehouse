@@ -51,7 +51,7 @@
        		</c:choose>
        	</tr>
        	<tr>
-       		<td><a href="/user/donations" class="btn">Wstecz</a></td>
+       		<td><a href="/user/donations?sortBy=all" class="btn">Wstecz</a></td>
        		<td></td>
     	</tr>
 	</table>

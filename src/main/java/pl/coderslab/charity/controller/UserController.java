@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.User;
@@ -128,8 +129,28 @@ public class UserController {
 	}
 	
 	@RequestMapping("/user/donations")
-	public String displayDonationsGivenByUser(@AuthenticationPrincipal CurrentUser customUser, Model model) {
-		List<Donation> donations = donationRepository.findAllByUserIdsortByStatus(customUser.getUser().getId(),1);
+	public String displayDonationsGivenByUser(@AuthenticationPrincipal CurrentUser customUser, 
+			Model model, 
+			@RequestParam String sortBy) {
+		List<Donation> donations = new ArrayList<Donation>();
+		long userId = customUser.getUser().getId();
+		switch(sortBy) {
+			case("all"):
+				donations = donationRepository.findAllByUserId(userId);
+				break;
+			case("received"):
+				donations = donationRepository.findAllByUserIdSortByStatus(userId, 1);
+				break;
+			case("not_received"):
+				donations = donationRepository.findAllByUserIdSortByStatus(userId, 0);
+				break;
+			case("pickUpDate"):
+				donations = donationRepository.findAllByUserIdSortByPickUpDate(userId);
+				break;
+			case("receiveDate"):
+				donations = donationRepository.findAllByUserIdSortByReceiveDate(userId);
+				break;
+		}
 		model.addAttribute("donations", donations);
 		return "user-donations";
 	}
