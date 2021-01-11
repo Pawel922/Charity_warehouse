@@ -24,11 +24,11 @@
 				<td style="border:none">Wyświetl</td>
 				<td style="border:none">
 					<select name="sortBy">
-						<option value="all">wszystkie</option>
-						<option value="received">wg statusu: odebrane</option>
-						<option value="not_received">wg statusu: nieodebrane</option>
-						<option value="pickUpDate">wg daty odbioru</option>
-						<option value="receiveDate">wg daty przekazania</option>
+						<option value="all" <c:if test="${param.sortBy.equals('all')}">selected</c:if>>wszystkie</option>
+						<option value="received" <c:if test="${param.sortBy.equals('received')}">selected</c:if>>wg statusu: odebrane</option>
+						<option value="not_received" <c:if test="${param.sortBy.equals('not_received')}">selected</c:if>>wg statusu: nieodebrane</option>
+						<option value="pickUpDate" <c:if test="${param.sortBy.equals('pickUpDate')}">selected</c:if>>wg daty odbioru</option>
+						<option value="receiveDate" <c:if test="${param.sortBy.equals('receiveDate')}">selected</c:if>>wg daty przekazania</option>
 					</select>
 				</td>
 				<td style="border:none">
