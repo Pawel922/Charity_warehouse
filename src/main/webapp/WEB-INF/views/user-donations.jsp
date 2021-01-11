@@ -54,7 +54,7 @@
        					<c:when test="${donation.receiveDate == null}"><td style="text-align:center">----.--.--</td></c:when>
        					<c:otherwise><td>${donation.receiveDate}</td></c:otherwise>
        				</c:choose>
-       				<td><a href="/donation/details/${donation.id}" class="btn">Szczegóły</a></td>
+       				<td><a href="/donation/details/${donation.id}?sortBy=${param.sortBy}" class="btn">Szczegóły</a></td>
        			</tr>
        		</c:forEach>
 		</table>

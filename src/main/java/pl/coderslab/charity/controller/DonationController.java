@@ -83,7 +83,7 @@ public class DonationController {
     }
     
     @RequestMapping("/donation/details/{id}")
-    public String displayDetailsForm(@PathVariable long id, Model model) {
+    public String displayDetailsForm(@PathVariable long id, @RequestParam String sortBy, Model model) {
     	Optional<Donation> optDonation = donationRepository.findById(id);
     	if(optDonation.isPresent()) {
     		model.addAttribute("donation", optDonation.get());
