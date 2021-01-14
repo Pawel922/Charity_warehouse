@@ -15,6 +15,7 @@ import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.repository.UserService;
 import pl.coderslab.charity.service.CurrentUser;
+import pl.coderslab.charity.service.EmailSender;
 
 import java.util.List;
 
@@ -26,14 +27,17 @@ public class HomeController {
     private final InstitutionRepository institutionRepository;
     private final DonationRepository donationRepository;
     private final UserService userService;
+    private final EmailSender emailSender;
 
     @Autowired
     public HomeController(InstitutionRepository institutionRepository,
                           DonationRepository donationRepository,
-                          UserService userService) {
+                          UserService userService,
+                          EmailSender emailSender) {
         this.institutionRepository = institutionRepository;
         this.donationRepository = donationRepository;
         this.userService = userService;
+        this.emailSender = emailSender;
     }
 
     @RequestMapping("/")
@@ -58,6 +62,12 @@ public class HomeController {
     		userService.saveUser(userToRegister);
     		return "register";
     	}
+    }
+    
+    @RequestMapping("/send")
+    public String sendMessage() {
+    	emailSender.sendEmail("", "", "");
+    	return "redirect:/";
     }
     
     @RequestMapping("/login")
