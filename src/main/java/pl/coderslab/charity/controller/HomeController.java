@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.entity.User;
@@ -65,9 +67,12 @@ public class HomeController {
     }
     
     @RequestMapping("/send")
-    public String sendMessage() {
-    	emailSender.sendEmail("", "", "");
-    	return "redirect:/";
+    public String sendMessage(@RequestParam String name,
+    		@RequestParam String surname,
+    		@RequestParam String message) {
+    	String title= "Wiadomość od " + name + " " + surname;
+    	emailSender.sendEmail("", title, message);
+    	return "send-confirmation";
     }
     
     @RequestMapping("/login")
