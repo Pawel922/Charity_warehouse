@@ -5,9 +5,9 @@
         <h2>Skontaktuj się z nami</h2>
         <h3>Formularz kontaktowy</h3>
         <form class="form--contact" action="/send">
-            <div class="form-group form-group--50"><input type="text" name="name" placeholder="Imię"/></div>
-            <div class="form-group form-group--50"><input type="text" name="surname" placeholder="Nazwisko"/></div>
-            <div class="form-group"><textarea name="message" placeholder="Wiadomość" rows="1"></textarea></div>
+            <div class="form-group form-group--50"><input type="text" name="name" placeholder="Imię"/><p class="warning"></p></div>
+            <div class="form-group form-group--50"><input type="text" name="surname" placeholder="Nazwisko"/><p class="warning"></p></div>
+            <div class="form-group"><textarea name="message" placeholder="Wiadomość" rows="1"></textarea><p class="warning"></p></div>
             <button class="btn" type="submit">Wyślij</button>
         </form>
     </div>
@@ -19,3 +19,5 @@
         </div>
     </div>
 </footer>
+
+<script src="resources/js/app-footer.js"></script>
