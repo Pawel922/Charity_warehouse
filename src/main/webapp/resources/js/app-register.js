@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		e.preventDefault();
 		let allValuesCorrect = true;
 		const regexToCheckEmpty = /^\s*$/;
-		const regexToCheck = /[A-Za-z]+/;
+		const regexToCheck = /^[A-Za-z]+$/;
 		inputs.forEach(input => {
 			if(input.name === 'name') {
 				if(regexToCheckEmpty.test(input.value)) {
