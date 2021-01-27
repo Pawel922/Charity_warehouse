@@ -38,6 +38,10 @@ public class User {
 			   joinColumns = @JoinColumn(name = "user_id"), 
 			   inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
+	
+	private boolean confirmationStatus;
+	
+	private String confirmationId;
 
 	public long getId() {
 		return id;
@@ -94,4 +98,22 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	public boolean isConfirmationStatus() {
+		return confirmationStatus;
+	}
+
+	public void setConfirmationStatus(boolean confirmationStatus) {
+		this.confirmationStatus = confirmationStatus;
+	}
+
+	public String getConfirmationId() {
+		return confirmationId;
+	}
+
+	public void setConfirmationId(String confirmationId) {
+		this.confirmationId = confirmationId;
+	}
+	
+	
 }

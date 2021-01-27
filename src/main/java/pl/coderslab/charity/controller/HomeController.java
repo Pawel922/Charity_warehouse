@@ -61,8 +61,13 @@ public class HomeController {
     	if(result.hasErrors()) {
     		return "register";
     	} else {
+    		userToRegister.setConfirmationId(createConfirmationID());
     		userService.saveUser(userToRegister);
-    		return "register";
+    		emailSender.sendEmail(userToRegister.getEmail(), 
+    				"Link aktywacyjny", 
+    				"Aby aktywować konto, kliknij link " 
+    				+ "http://localhost:8080/confirm?id=" + userToRegister.getConfirmationId());
+    		return "register-confirmation";
     	}
     }
     
@@ -93,5 +98,9 @@ public class HomeController {
     @ModelAttribute("numOfDonations")
     public long getNumberOfDonations() {
         return donationRepository.findAll().stream().count();
+    }
+    
+    private String createConfirmationID() {
+        return java.util.UUID.randomUUID().toString();
     }
 }
