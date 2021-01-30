@@ -17,6 +17,8 @@ public interface UserRepository extends JpaRepository <User, Long> {
 	
 	Optional<User> findByEmail(String email);
 	
+	Optional<User> findByConfirmationId(String confirmationId);
+	
 	@Query("SELECT u FROM User u JOIN u.roles r WHERE r.name LIKE 'ROLE_USER'")
 	List<User> getAllUsers();
 	

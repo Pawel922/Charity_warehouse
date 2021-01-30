@@ -99,7 +99,7 @@ public class User {
 		this.roles = roles;
 	}
 
-	public boolean isConfirmationStatus() {
+	public boolean getConfirmationStatus() {
 		return confirmationStatus;
 	}
 

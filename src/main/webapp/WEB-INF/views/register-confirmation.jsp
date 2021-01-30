@@ -17,7 +17,7 @@
 <%@ include file="header.jsp" %>
 
 <div class="slogan container container--90">
-	<h2>Na Twój adres e-mail wysłaliśmy link do aktywacji konta</h2>
+	<h2>${message}</h2>
 </div>
 
 </header>

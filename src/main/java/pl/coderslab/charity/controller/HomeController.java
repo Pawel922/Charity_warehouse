@@ -15,11 +15,13 @@ import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
+import pl.coderslab.charity.repository.UserRepository;
 import pl.coderslab.charity.repository.UserService;
 import pl.coderslab.charity.service.CurrentUser;
 import pl.coderslab.charity.service.EmailSender;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -28,6 +30,7 @@ public class HomeController {
 
     private final InstitutionRepository institutionRepository;
     private final DonationRepository donationRepository;
+    private final UserRepository userRepository;
     private final UserService userService;
     private final EmailSender emailSender;
 
@@ -35,10 +38,12 @@ public class HomeController {
     public HomeController(InstitutionRepository institutionRepository,
                           DonationRepository donationRepository,
                           UserService userService,
+                          UserRepository userRepository,
                           EmailSender emailSender) {
         this.institutionRepository = institutionRepository;
         this.donationRepository = donationRepository;
         this.userService = userService;
+        this.userRepository = userRepository;
         this.emailSender = emailSender;
     }
 
@@ -57,7 +62,9 @@ public class HomeController {
     }
     
     @PostMapping("/register")
-    public String processRegisterForm(@ModelAttribute("userToRegister") @Valid User userToRegister,BindingResult result) {
+    public String processRegisterForm(@ModelAttribute("userToRegister") @Valid User userToRegister,
+    		BindingResult result,
+    		Model model) {
     	if(result.hasErrors()) {
     		return "register";
     	} else {
@@ -67,8 +74,29 @@ public class HomeController {
     				"Link aktywacyjny", 
     				"Aby aktywować konto, kliknij link " 
     				+ "http://localhost:8080/confirm?id=" + userToRegister.getConfirmationId());
+    		String message = "Na Twój adres e-mail wysłaliśmy link do aktywacji konta.";
+    		model.addAttribute("message", message);
     		return "register-confirmation";
     	}
+    }
+    
+    @RequestMapping("/confirm")
+    public String completeRegistration(@RequestParam(name="id", required=true) String confirmationId, Model model) {
+    	Optional<User> optUser = userRepository.findByConfirmationId(confirmationId);
+    	if(optUser.isPresent()) {
+    		User user = optUser.get();
+    		if(!optUser.get().getConfirmationStatus()) {
+    			user.setConfirmationStatus(true);
+    			user.setConfirmationId(null);
+    			userRepository.save(user);
+    		}
+    		String message = "Witaj " + user.getName() + " " + user.getSurname() + ", twoje konto jest aktywne.";
+			model.addAttribute("message", message);
+    	} else {
+    		String message = "Coś poszło nie tak. Spróbuj jeszcze raz.";
+    		model.addAttribute("message", message);
+    	}
+    	return "register-confirmation";
     }
     
     @RequestMapping("/send")
