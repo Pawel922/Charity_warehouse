@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	let form = document.querySelector("[name='login']");
 	let subBtn = document.querySelector("[name='login'] [type='submit']");
 	let inputs = document.querySelectorAll("[name='login'] input");
+	let emailInput = document.querySelector("input[name='email']");
+	
+	const urlServer = "http://localhost:8080";
 	
 	subBtn.addEventListener("click", function(e) {
 		e.preventDefault();
@@ -31,7 +34,21 @@ document.addEventListener("DOMContentLoaded", function() {
 		})
 		
 		if(allValuesCorrect) {
-			form.submit();
+			checkStatus(emailInput.value)
+			//form.submit();
 		}
-	} )
+	})
+	
+	function checkStatus(email) {
+		const xhr = new XMLHttpRequest();
+			xhr.open("GET", urlServer + "/user/check/" + email, true);
+			xhr.send();
+			xhr.addEventListener("load", e => {
+    		if (xhr.status === 200) {
+				console.log("Status OK");
+    		} else if (xhr.status === 404) {
+				console.log("User not found");
+			}
+		});
+	}
 })
