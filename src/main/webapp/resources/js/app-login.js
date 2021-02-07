@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		
 		if(allValuesCorrect) {
 			checkStatus(emailInput.value)
-			//form.submit();
 		}
 	})
 	
@@ -45,9 +44,9 @@ document.addEventListener("DOMContentLoaded", function() {
 			xhr.send();
 			xhr.addEventListener("load", e => {
     		if (xhr.status === 200) {
-				console.log("Status OK");
+				form.submit();
     		} else if (xhr.status === 404) {
-				console.log("User not found");
+				emailInput.nextElementSibling.innerText = "Konto nieaktywne";
 			}
 		});
 	}
