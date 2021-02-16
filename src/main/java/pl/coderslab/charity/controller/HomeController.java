@@ -99,15 +99,6 @@ public class HomeController {
     	return "register-confirmation";
     }
     
-    @RequestMapping("/send")
-    public String sendMessage(@RequestParam String name,
-    		@RequestParam String surname,
-    		@RequestParam String message) {
-    	String title= "Wiadomość od " + name + " " + surname;
-    	emailSender.sendEmail("", title, message);
-    	return "send-confirmation";
-    }
-    
     @RequestMapping("/login")
     public String displayLoginForm() {
     	return "login";
