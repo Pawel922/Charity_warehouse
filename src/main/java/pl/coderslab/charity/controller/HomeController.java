@@ -18,7 +18,6 @@ import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.repository.UserRepository;
 import pl.coderslab.charity.repository.UserService;
 import pl.coderslab.charity.service.CurrentUser;
-import pl.coderslab.charity.service.EmailSender;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,19 +31,16 @@ public class HomeController {
     private final DonationRepository donationRepository;
     private final UserRepository userRepository;
     private final UserService userService;
-    private final EmailSender emailSender;
 
     @Autowired
     public HomeController(InstitutionRepository institutionRepository,
                           DonationRepository donationRepository,
                           UserService userService,
-                          UserRepository userRepository,
-                          EmailSender emailSender) {
+                          UserRepository userRepository) {
         this.institutionRepository = institutionRepository;
         this.donationRepository = donationRepository;
         this.userService = userService;
         this.userRepository = userRepository;
-        this.emailSender = emailSender;
     }
 
     @RequestMapping("/")
@@ -70,13 +66,7 @@ public class HomeController {
     	} else {
     		userToRegister.setConfirmationId(createConfirmationID());
     		userService.saveUser(userToRegister);
-    		emailSender.sendEmail(userToRegister.getEmail(), 
-    				"Link aktywacyjny", 
-    				"Aby aktywować konto, kliknij link " 
-    				+ "http://localhost:8080/confirm?id=" + userToRegister.getConfirmationId());
-    		String message = "Na Twój adres e-mail wysłaliśmy link do aktywacji konta.";
-    		model.addAttribute("message", message);
-    		return "register-confirmation";
+    		return "redirect:/link?confirmId=" + userToRegister.getConfirmationId() + "&email=" + userToRegister.getEmail();
     	}
     }
     
