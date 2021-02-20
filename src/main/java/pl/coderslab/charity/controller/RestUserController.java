@@ -53,4 +53,11 @@ public class RestUserController {
 		}
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
+	
+	@GetMapping("/check/{email}")
+	public ResponseEntity<Void> checkIfUserExist(@PathVariable String email) {
+		Optional<User> optUserToCheck = userRepository.findByEmail(email);
+		return optUserToCheck.isPresent() ? new ResponseEntity<Void>(HttpStatus.OK) : new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	}
+	
 }

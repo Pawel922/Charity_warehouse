@@ -10,8 +10,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	let emailInput = document.querySelector(".modal-body input");
 	//Get submit button
 	let submitBtn = document.querySelector(".modal-body button")
-	// Get paragraph with warnings
+	//Get paragraph with warnings
 	let warning = document.querySelector(".modal-body .warning")
+	//Get form from modal
+	let form = document.querySelector(".formTable")
+	
+	const urlServer = "http://localhost:8080";
 	
 	
 	// When the user clicks on the button, open the modal to repeat password
@@ -43,7 +47,22 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 		
 		if(isValueCorrect) {
-			
+			checkEmail(emailInput.value);
 		}
 	})
+	
+	
+	//function to check if email exist in database
+	function checkEmail(email) {
+		const xhr = new XMLHttpRequest();
+			xhr.open("GET", urlServer + "/check/" + email, true);
+			xhr.send();
+			xhr.addEventListener("load", e => {
+    		if (xhr.status === 200) {
+				form.submit();
+    		} else if (xhr.status === 404) {
+				warning.innerText = "Użytkownik o podanym adresie e-mail nie istnieje";
+			}
+		});
+	}
 })
