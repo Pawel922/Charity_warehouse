@@ -3,6 +3,7 @@ package pl.coderslab.charity.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.TemplateEngine;
@@ -48,5 +49,18 @@ public class EmailController {
         model.addAttribute("message", message);
         return "register-confirmation";
     	
+    }
+    
+    @PostMapping("/password/link")
+    public String sendLinkToResetPassword(@RequestParam String email, Model model) {
+    	Context context = new Context();
+        context.setVariable("header", "Link do zmiany hasła");
+        context.setVariable("title", "Aby zmienić hasło kliknij poniższy link:");
+        context.setVariable("link", "http://localhost:8080/password/reset?email=" + email);
+        String body = templateEngine.process("template2", context);
+        emailSender.sendEmail(email, "Zmiana hasła", body);
+    	String message = "Na adres " + email + " wysłaliśmy link do zmiany hasła";
+        model.addAttribute("message", message);
+        return "register-confirmation";
     }
 }

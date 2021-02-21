@@ -50,11 +50,12 @@
   		</div>
   		<div class="modal-body">
   			<h1>Podaj nam swój e-mail użyty przy rejestracji</h1>
-    		<form class="formTable" method="post">
+    		<form class="formTable" method="post" action="/password/link">
     			<table>
     				<tr>
     					<td>E-mail:</td>
     					<td><input data-name="email" name="email"></td>
+    					<td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></td>
     					<td><button type="submit" class="btn">Wyślij</button></td>
     				</tr>
     			</table>
