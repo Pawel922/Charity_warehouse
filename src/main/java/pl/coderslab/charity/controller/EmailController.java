@@ -9,18 +9,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import pl.coderslab.charity.entity.User;
+import pl.coderslab.charity.repository.UserRepository;
 import pl.coderslab.charity.service.EmailSender;
 
 @Controller
 public class EmailController {
     private final EmailSender emailSender;
     private final TemplateEngine templateEngine;
+    private final UserRepository userRepository;
     
     @Autowired
     public EmailController(EmailSender emailSender,
-                           TemplateEngine templateEngine){
+                           TemplateEngine templateEngine,
+                           UserRepository userRepository){
+    	
         this.emailSender = emailSender;
         this.templateEngine = templateEngine;
+        this.userRepository = userRepository;
     }
     
     @RequestMapping("/send")
@@ -53,14 +59,24 @@ public class EmailController {
     
     @PostMapping("/password/link")
     public String sendLinkToResetPassword(@RequestParam String email, Model model) {
+    	//create new confirmationId for user - link to change password can be use only once; 
+    	User userToChangePassword = userRepository.findByEmail(email).get();
+    	String confirmId = createConfirmationID();
+    	userToChangePassword.setConfirmationId(confirmId);
+    	userRepository.save(userToChangePassword);
+    	
     	Context context = new Context();
         context.setVariable("header", "Link do zmiany hasła");
         context.setVariable("title", "Aby zmienić hasło kliknij poniższy link:");
-        context.setVariable("link", "http://localhost:8080/password/reset?email=" + email);
+        context.setVariable("link", "http://localhost:8080/password/reset?email=" + email + "&confirmId=" + confirmId);
         String body = templateEngine.process("template2", context);
         emailSender.sendEmail(email, "Zmiana hasła", body);
     	String message = "Na adres " + email + " wysłaliśmy link do zmiany hasła";
         model.addAttribute("message", message);
         return "register-confirmation";
+    }
+    
+    private String createConfirmationID() {
+        return java.util.UUID.randomUUID().toString();
     }
 }
