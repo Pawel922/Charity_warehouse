@@ -71,9 +71,24 @@ public class EmailController {
         context.setVariable("link", "http://localhost:8080/password/reset?email=" + email + "&confirmId=" + confirmId);
         String body = templateEngine.process("template2", context);
         emailSender.sendEmail(email, "Zmiana hasła", body);
-    	String message = "Na adres " + email + " wysłaliśmy link do zmiany hasła";
+    	String message = "Na adres " + email + " wysłaliśmy link do zmiany hasła.";
         model.addAttribute("message", message);
         return "register-confirmation";
+    }
+    
+    @RequestMapping("/password/reset")
+    public String openFormToSetNewPassword(@RequestParam String email, 
+    		@RequestParam(required=true) String confirmId, 
+    		Model model) {
+    	User userToSetNewPassword = userRepository.findByEmail(email).get();
+    	if(confirmId.equals(userToSetNewPassword.getConfirmationId())) {
+    		userToSetNewPassword.setConfirmationId(null);
+    		userRepository.save(userToSetNewPassword);
+    		return "reset-password";
+    	}
+    	String message = "Próba zmiany hasła nie powiodła się.";
+    	model.addAttribute("message", message);
+    	return "register-confirmation";
     }
     
     private String createConfirmationID() {
