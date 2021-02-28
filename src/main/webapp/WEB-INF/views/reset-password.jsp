@@ -19,20 +19,20 @@
 
 <section class="login-page">
 	<h2>Utwórz nowe hasło</h2>
-	<form name="" method="post">
+	<form id="resetPass" action="/password/reset" method="post">
         <div class="form-group">
-          <input type="password" name="password" placeholder="Hasło" />
+          <input type="password" name="password" placeholder="Hasło"/>
           <p class="warning"></p>
         </div>
         <div class="form-group">
-          <input type="password" name="password2" placeholder="Powtórz hasło" />
+          <input type="password" name="password2" placeholder="Powtórz hasło"/>
           <p class="warning"></p>
+        </div>
+        <div class="form-group form-group--buttons">     
+          <input type="submit" class="btn" value="Zapisz"/> 
         </div>
         <div>
           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </div>
-        <div class="form-group form-group--buttons">     
-          <button class="btn" type="submit">Zapisz</button> 
         </div>
 	</form>
 </section>
@@ -40,6 +40,8 @@
 </header>
 
 <%@ include file="footer.jsp" %>
+
+<script src="/resources/js/app-reset.js"></script>
 
 </body>
 </html>
