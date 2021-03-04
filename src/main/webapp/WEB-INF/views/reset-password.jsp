@@ -19,7 +19,7 @@
 
 <section class="login-page">
 	<h2>Utwórz nowe hasło</h2>
-	<form id="resetPass" action="/password/reset" method="post">
+	<form id="resetPass" action="/password/reset/${email}" method="post">
         <div class="form-group">
           <input type="password" name="password" placeholder="Hasło"/>
           <p class="warning"></p>

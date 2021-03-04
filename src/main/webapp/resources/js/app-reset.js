@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			newPass.nextElementSibling.innerHTML = "Hasło musi zawierać od 5 do 10 znaków";
 		} else if (newPass.value !== repPass.value){
 			repPass.nextElementSibling.innerHTML = "Hasło źle powtórzone";
+		} else {
+			form.submit();
 		}
 	})
 	

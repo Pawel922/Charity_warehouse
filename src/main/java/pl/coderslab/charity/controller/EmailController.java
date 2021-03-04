@@ -1,8 +1,10 @@
 package pl.coderslab.charity.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,10 +86,23 @@ public class EmailController {
     	if(confirmId.equals(userToSetNewPassword.getConfirmationId())) {
     		userToSetNewPassword.setConfirmationId(null);
     		userRepository.save(userToSetNewPassword);
+    		model.addAttribute("email",email);
     		return "reset-password";
     	}
     	String message = "Próba zmiany hasła nie powiodła się.";
     	model.addAttribute("message", message);
+    	return "register-confirmation";
+    }
+    
+    @PostMapping("password/reset/{email}")
+    public String saveNewPassword(@PathVariable String email, 
+    		@RequestParam String password, 
+    		Model model) {
+    	User userToSetNewPassword = userRepository.findByEmail(email).get();
+    	userToSetNewPassword .setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
+    	userRepository.save(userToSetNewPassword);
+    	String message = "Twoje hasło zostało zmienione.";
+    	model.addAttribute("message",message);
     	return "register-confirmation";
     }
     
